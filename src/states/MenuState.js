@@ -13,16 +13,13 @@ class MenuState extends Phaser.State {
     create() {
         this.game.add.tileSprite(0, 0, 800, 600, 'background');
         let center = { x: this.game.world.centerX, y: this.game.world.centerY };
-        let startButton = new MyButton(this.game, center.x, center.y, 'startBtn');
-        startButton.create();
-        //let startButton = this.game.add.button(center.x, center.y, 'startBtn');
-        startButton.onInputUp.add(startOnClick, this);
-        startButton.anchor.set(0.5);
+        let startButton = new MyButton(this.game);
+        startButton.create(center.x, center.y, 'startBtn', startOnClick);
     }
 
 }
 
-function startOnClick(game) {
+function startOnClick() {
     console.log('DUPA1');
 }
 

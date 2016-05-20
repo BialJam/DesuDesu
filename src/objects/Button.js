@@ -2,13 +2,12 @@
 
 class MyButton extends Phaser.Button {
 
-    constructor(game, x, y, key) {
-        super(game, x, y, key);
-
+    constructor(game) {
+        super(game);
     }
 
-    create() {
-
+    create(x, y, key, callback) {
+        this.game.add.button(x, y, key, callback);
     }
 }
 
