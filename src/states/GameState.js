@@ -1,5 +1,4 @@
 /// <reference path="../../node_modules/phaser/typescript/phaser.d.ts" />
-import RainbowText from 'objects/RainbowText';
 import Grid from 'objects/Grid';
 import Player from 'objects/Player';
 
