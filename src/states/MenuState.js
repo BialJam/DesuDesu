@@ -5,9 +5,9 @@ import MyButton from 'objects/Button';
 class MenuState extends Phaser.State {
 
     preload() {
-        this.game.load.spritesheet('startBtn', '../../assets/button.png', 120, 80);
-        this.game.load.image('background', '../../assets/tile.png');
-        
+        this.game.load.spritesheet('startBtn', 'assets/button.png', 120, 80);
+        this.game.load.image('background', 'assets/tile.png');
+
     }
 
     create() {

@@ -11,7 +11,7 @@ class Game extends Phaser.Game {
 		super(800, 600, Phaser.AUTO, 'content', null);
 		this.state.add('MenuState', MenuState, false);
 		this.state.add('GameState', GameState, false);
-		this.state.start('MenuState');
+		this.state.start('GameState');
 	}
 }
 
