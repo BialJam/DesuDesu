@@ -4,13 +4,13 @@ Game for bialjam 2016 gamejam in phaser js engine.
 
 ## Install
 
-You need [Node.js and npm](https://nodejs.org/).
+Project requires [Node.js and npm](https://nodejs.org/) to run, the game runs in a browser.
 
-Install dependencies
+First install dependencies for the project
 
 `npm install`
 
-Run a development build...
+Then run a development build...
 
 `npm start`
 
@@ -18,16 +18,7 @@ Run a development build...
 
 `npm run production`
 
-Development builds will copy `phaser.min.js` together with `phaser.map` and `phaser.js`
-Your ES6 code will be transpiled into ES5 and concatenated into a single file.
-A sourcemap for your code will also be included (by default `game.map.js`).
-
-Production builds will only copy `phaser.min.js`. Your ES6 code will be transpiled and
-minified using UglifyJS.
-
-Any modification to the files inside the `./src` and `./static` folder will trigger a full page reload.
-
-If you modify the contents of other files, please manually restart the server.
+The game will be available in urls shown in logs, by default: http://localhost:3000
 
 ## Boilerplate info
 
