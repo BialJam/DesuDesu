@@ -2,6 +2,8 @@
 
 import GameState from 'states/GameState';
 
+var _ = require("underscore");
+
 class Game extends Phaser.Game {
 
 	constructor() {

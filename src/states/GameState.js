@@ -1,5 +1,4 @@
 /// <reference path="../../node_modules/phaser/typescript/phaser.d.ts" />
-
 import Grid from 'objects/Grid';
 import Player from 'objects/Player';
 
@@ -11,11 +10,10 @@ class GameState extends Phaser.State {
 		this.game.load.json('level', '../../static/levels/level1.json');
 		var levelJson = this.game.cache.getJSON('level');
 		
-		var w = levelJson.w;
-		var h = levelJson.h;
-		var max = Math.max(w, h);
+		this.game.load.tilemap('tiles', '../../assets/level1.json', null, Phaser.Tilemap.TILED_JSON);
+        this.game.load.image('tiles', '/images/terrain_atlas.png');
 		
-		var text = game.add.text(100, 100, "Current Phaser version: " + w + " " + h, { fill: '#ffffff' });	
+		var text = this.game.add.text(100, 100, "Current Phaser version: ", { fill: '#ffffff' });	
 	}
 }
 
