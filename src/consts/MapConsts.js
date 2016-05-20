@@ -1,5 +1,5 @@
 const MapConsts = {
     Size : 16
-}
+};
 
-export default MapConsts
+export default MapConsts;

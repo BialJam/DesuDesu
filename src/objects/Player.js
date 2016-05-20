@@ -1,6 +1,6 @@
 /// <reference path="../../node_modules/phaser/typescript/phaser.d.ts" />
+import MapConsts from 'consts/MapConsts.js';
 
-import MapConsts from 'consts/MapConsts.js'
 
 class Player extends Phaser.Sprite {
     constructor () {
@@ -14,4 +14,4 @@ class Player extends Phaser.Sprite {
     }
 }
 
-export default Player
+export default Player;
