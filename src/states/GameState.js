@@ -17,7 +17,6 @@ class GameState extends Phaser.State {
 		var text = game.add.text(100, 100, "Current Phaser version: " + w + " " + h, { fill: '#ffffff' });
 		
 	}
-
 }
 
 export default GameState;
