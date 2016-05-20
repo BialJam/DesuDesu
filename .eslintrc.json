@@ -1,0 +1,10 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 6
+    },
+    "extends": "standard",
+    "installedESLint": true,
+    "plugins": [
+        "standard"
+    ]
+}
