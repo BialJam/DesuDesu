@@ -11,11 +11,6 @@ class Game extends Phaser.Game {
 		this.state.add('GameState', GameState, false);
 		this.state.start('GameState');
 	}
-	
-	preload () {
-		this.load.spritesheet('cursor', 'static/assets/cursor.png', 16, 16, 4);
-	}
-
 }
 
 new Game();

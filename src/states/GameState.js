@@ -4,7 +4,8 @@ import Player from 'objects/Player';
 
 class GameState extends Phaser.State {
     create() {
-		this.player1 = new Player(this.game);
+		let player1 = new Player(this.game);
+		player1.create();
 		let center = { x: this.game.world.centerX, y: this.game.world.centerY }
 		//let text = new RainbowText(this.game, center.x, center.y, "- phaser -\nwith a sprinkle of\nES6 dust!");
 		this.game.load.json('level', '../../static/levels/level1.json');
@@ -14,6 +15,10 @@ class GameState extends Phaser.State {
         this.game.load.image('tiles', '/images/terrain_atlas.png');
 		
 		var text = this.game.add.text(100, 100, "Current Phaser version: ", { fill: '#ffffff' });	
+	}
+	
+	preload () {
+		this.load.spritesheet('cursor', 'assets/cursor.png', 16, 16, 4);
 	}
 }
 

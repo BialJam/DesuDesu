@@ -11,11 +11,11 @@ class Player extends Phaser.Sprite {
     
     create () {
         this.sprite = this.game.add.sprite(
-            this.gridPosX,
-            this.gridPosY,
+            100,
+            150,
             'cursor');
         this.sprite.animations.add('cycle');
-        this.sprite.animations.play('cycle', 50);
+        this.sprite.animations.play('cycle', 8, true);
     }
 }
 
