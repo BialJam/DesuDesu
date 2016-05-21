@@ -14,7 +14,7 @@ class Tile extends Phaser.Group {
         this.health = 0;
     }
     
-    canLiveOn() {
+    isHabitable() {
         return true;
     }
 
@@ -23,8 +23,15 @@ class Tile extends Phaser.Group {
     }
 
     populate(player, health) {
+        if (player != this.player) {
+            this.health = 0;
+        }
         this.player = player;
-        this.health = health;
+        this.health += health;
+    }
+    
+    depopulate(health) {
+        this.health = Math.max(0, this.health - health);
     }
 }
 

@@ -20,7 +20,6 @@ class GameState extends Phaser.State {
 	addPlayerByInfo (playerInfo) {
 		let id = playerInfo.id;
 		let pos = MapConsts.StartingPositions[id];
-		console.log(this.game);
 		this.playerObjects.push (new Player(this.game, playerInfo, pos.x, pos.y));
 	}
 	
@@ -35,11 +34,26 @@ class GameState extends Phaser.State {
 	divideInto(player, targetTileX, targetTileY) {
 		let srcTile = playerTile(player);
 		let targetTile = tileAt(targetTileX, targetTileY);
+		if (!targetTile.isHabitable())
+			return;
 		
 		let healthToMove = Math.floor(targetTile.health / 2);
-		if (tile.isFree()) {
+		if (healthToMove == 0)
+			return;
+		
+		if (targetTile.isFree() || player.ownsTile(targetTile)) {
+			srcTile.depopulate(healthToMove);
 			targetTile.populate(player, healthToMove);
-			srcTile.health -= healthToMove;
+		}
+		else {
+			
+			let healthToTake = Math.min(targetTile.health, healthToMove);
+			srcTile.depopulate(healthToMove);
+			targetTile.depopulate(healthToTake);
+			let healthToPopulate = healthToMove - healthToTake;
+			if (healthToPopulate > 0) {
+				targetTile.populate(player, healthToPopulate);
+			}
 		}
 	}
 	
