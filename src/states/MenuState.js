@@ -27,10 +27,10 @@ class MenuState extends Phaser.State {
 
         // let playersInfo = new Phaser.Text(this.game, 50, 25, 'Obecnie podłączeni gracze: ' + this.game.players.length, { font: "32px Arial", fill: "#ffffff" });
         // this.game.add.existing(playersInfo);
-        this.bluePlayer = this.game.add.button(100, 200, 'colorButtons', this.onClickBlue, this, 0, 0, 1);
-        this.greenPlayer = this.game.add.button(180, 200, 'colorButtons', this.onClickGreen, this, 2, 2, 3);
-        this.redPlayer = this.game.add.button(260, 200, 'colorButtons', this.onClickRed, this, 4, 4, 5);
-        this.yellowPlayer = this.game.add.button(340, 200, 'colorButtons', this.onClickYellow, this, 6, 6, 7);
+        this.bluePlayer = this.game.add.button(256, 200, 'colorButtons', this.onClickBlue, this, 0, 0, 1);
+        this.greenPlayer = this.game.add.button(384, 200, 'colorButtons', this.onClickGreen, this, 2, 2, 3);
+        this.redPlayer = this.game.add.button(512, 200, 'colorButtons', this.onClickRed, this, 4, 4, 5);
+        this.yellowPlayer = this.game.add.button(640, 200, 'colorButtons', this.onClickYellow, this, 6, 6, 7);
     }
 
     onClickRed() {
