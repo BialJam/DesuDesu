@@ -26,7 +26,16 @@ class MenuState extends Phaser.State {
 
         let playersInfo = new Phaser.Text(this.game, 50, 25, 'Obecnie podłączeni gracze: ' + this.game.players.length, { font: "32px Arial", fill: "#ffffff" });
         this.game.add.existing(playersInfo);
-    }
+        var bluePlayer = this.game.add.button(100, 200, 'colorButtons', this.onClickBlue, this, 0, 0, 1);   
+        var greenPlayer = this.game.add.button(180, 200, 'colorButtons', this.onClickGreen, this, 2, 2, 3);    
+        var redPlayer = this.game.add.button(260, 200, 'colorButtons', this.onClickRed, this, 4, 4, 5);    
+        var yellowPlayer = this.game.add.button(340, 200, 'colorButtons', this.onClickYellow, this, 6, 6, 7);    
+}
+    
+    onClickRed(){console.log("red")}
+    onClickBlue(){console.log("blue")}
+    onClickGreen(){console.log("green")}
+    onClickYellow(){console.log("yellow")}
 
     update() {
         if (this.game.input.gamepad.supported && this.game.input.gamepad.active && this.game.input.gamepad['pad1'] && this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_1) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_0) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_2) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_3) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_A) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_B) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_X) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_Y) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.PS3XC_SQUARE) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.PS3XC_CIRCLE) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.PS3XC_TRIANGLE) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.PS3XC_X)) {
