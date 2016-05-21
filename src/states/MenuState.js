@@ -3,11 +3,6 @@
 import MyButton from 'objects/Button';
 
 class MenuState extends Phaser.State {
-    preload() {
-        // this.game.load.spritesheet('startBtn', 'assets/button.png', 120, 80);
-        // this.game.load.image('background', 'assets/tile.png');
-    }
-
     create() {
         this.game.add.tileSprite(0, 0, 800, 600, 'background-menu');
         let center = { x: this.game.world.centerX, y: this.game.world.centerY };

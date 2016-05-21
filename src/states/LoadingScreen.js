@@ -18,7 +18,7 @@ class LoadingScreen extends Phaser.State {
         this.game.load.tilemap('myTileMap', 'assets/level11.json', null, Phaser.Tilemap.TILED_JSON);		
 		this.game.load.image('tiles', 'assets/tileset.png');
 		
-		this.load.spritesheet('cursor', 'assets/cursor.png', 16, 16, 4);	
+		this.load.spritesheet('cursor', 'assets/cursor.png', 32, 32, 4);	
     }
 
     afterLoaded() {
