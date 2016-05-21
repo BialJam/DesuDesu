@@ -18,6 +18,16 @@ class MenuState extends Phaser.State {
 
         this.players = [];
         this.game.input.gamepad.start();
+        
+        let pads = this.game.input.gamepad.padsConnected;
+        
+        console.log("connected pads: " + pads);
+        if (pads > 0) {
+            for (let i = 0; i < pads; ++i) {
+                this.addPlayer(i);
+            }
+        }
+                
         this.game.input.gamepad.callbackContext = this;
         this.game.input.gamepad.onConnectCallback = this.addPlayer;
 
