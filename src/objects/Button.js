@@ -2,13 +2,16 @@
 
 class MyButton extends Phaser.Button {
 
-    constructor(game) {
-        super(game);
+    constructor(game, x, y, key, callback, context) {
+        super(game, x, y, key, callback, context);
+        game.add.existing(this);
     }
 
-    create(x, y, key, callback) {
-        this.game.add.button(x, y, key, callback);
+    addText(text2, fontSize) {
+        let text = new Phaser.Text(this.game, 0, 0, text2, { font: fontSize +"px Arial", fill: "#ffffff" });
+        this.addChild(text);
     }
+
 }
 
 export default MyButton;
