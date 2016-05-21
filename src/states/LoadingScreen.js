@@ -10,7 +10,8 @@ class LoadingScreen extends Phaser.State {
         this.load.image('loading-bar', 'assets/loading/bar.png');
         this.load.addSyncPoint('image', 'loading-bar');
         this.load.onFileComplete.add(this.afterLoaded, this);
-
+        this.load.spritesheet('startBtn-menu', 'assets/button.png', 120, 80);
+        this.load.image('background-menu', 'assets/tile.png');
         // prefix loaded sprites with names of state/object
         this.load.image('loading-2', 'assets/loading/2.png');
         

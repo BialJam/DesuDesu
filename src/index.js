@@ -15,6 +15,11 @@ class Game extends Phaser.Game {
 		this.state.add('GameState', GameState, false);
 		this.state.start('LoadingScreen');
 	}
+	
+	create () {
+		console.log("game create");
+		this.stage.backgroundColor = "#ff00ff";
+	}
 }
 
 new Game();
