@@ -20,7 +20,6 @@ class Player extends Phaser.Group {
         this.sprite.tint = info.color;
         this.sprite.animations.add('cycle');
         this.sprite.animations.play('cycle', 8, true);
-        
         this.addChild(this.sprite);
     }
     
