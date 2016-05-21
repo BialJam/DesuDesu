@@ -1,4 +1,3 @@
-
 /// <reference path="../../node_modules/phaser/typescript/phaser.d.ts" />
 "use strict";
 
@@ -20,6 +19,8 @@ class LoadingScreen extends Phaser.State {
         this.game.load.image('tile', 'assets/tile.png');
 		
 		this.load.spritesheet('cursor', 'assets/cursor.png', 32, 32, 4);	
+        
+        this.load.bitmapFont('font', 'assets/04B_03___0.png', 'assets/04B_03__.xml');
         
         this.game.load.audio('themeAudio', 'assets/audio/themeAudio.mp3');        
     }
