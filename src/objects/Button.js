@@ -2,8 +2,8 @@
 
 class MyButton extends Phaser.Button {
 
-    constructor(game, x, y, key, callback, context) {
-        super(game, x, y, key, callback, context);
+    constructor(game, x, y, key, callback, context, frame1, frame2, frame3) {
+        super(game, x, y, key, callback, context, frame1, frame2, frame3);
         game.add.existing(this);
     }
 

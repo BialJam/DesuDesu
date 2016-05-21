@@ -7,8 +7,7 @@ class MenuState extends Phaser.State {
     create() {
         this.game.add.tileSprite(0, 0, 960, 640, 'background-menu');
         let center = { x: this.game.world.centerX, y: this.game.world.centerY };
-        let startButton = new MyButton(this.game, center.x, center.y, 'startBtn-menu', startOnClick, this);
-        startButton.addText('Rozpocznij grę', 24);
+        let startButton = new MyButton(this.game, 356, center.y, 'startGameSpritesheet', startOnClick, this, 0, 0, 1);
 
         this.playersColors = ['0x12fe00', '0xfff859', '0x0decfe', '0xfe544f'];
         this.isActive = [false, false, false, false];
