@@ -6,6 +6,7 @@ import Player, {PlayerInfo} from 'objects/Player';
 class MenuState extends Phaser.State {
     create() {
         // this.game.add.tileSprite(0, 0, 960, 640, 'background-menu');
+        this.game.add.image(0, 0, 'bg');
         let center = { x: this.game.world.centerX, y: this.game.world.centerY };
         this.playersColors = ['0x12fe00', '0xfff859', '0x0decfe', '0xfe544f'];
         this.buttons = ['any', 'up', 'down', 'left', 'right', 'action'];
@@ -19,10 +20,10 @@ class MenuState extends Phaser.State {
         this.playerText = {};
         this.playerButtonId = {};
         this.playerButtons = [];
-        
+
         for (let i = 0; i < 4; ++i) {
             let color = this.playersColors[i];
-            this.playerText[i] = this.game.add.bitmapText(128, 250 + 16 + (i * 70), 'font', 'player' + (i+1) + ' - press any button to join', 32);
+            this.playerText[i] = this.game.add.bitmapText(128, 250 + 16 + (i * 70), 'font', 'player' + (i + 1) + ' - press any button to join', 32);
             this.playerText[i].tint = color;
             this.playerButtons[i] = this.add.sprite(32, 250 + (i * 70), 'colorButtons', 2);
             this.playerButtons[i].tint = color;
@@ -43,7 +44,7 @@ class MenuState extends Phaser.State {
             let color = this.playersColors[this.playerNums];
             let padMap = {};
             let pId = this.playerNums;
-            this.playerz[id] = new PlayerInfo(pad, color, this.playerNums + 1, padMap);
+            this.playerz[id] = new PlayerInfo(pad, color, pId, padMap);
             this.playerButtonId[id] = 0;
             this.playerNums++;
             pad.addCallbacks(this, {
@@ -52,17 +53,25 @@ class MenuState extends Phaser.State {
                         let a = this.buttons[this.playerButtonId[id]];
                         padMap[a] = x;
                         this.playerButtonId[id]++;
-                        if (this.playerButtonId[id] + 1 > this.buttons.length) {
-                            this.playerText[pId].text = "press 'action' to begin!";
+                        if (this.playerButtonId[id] >= this.buttons.length) {
+                            this.playerText[pId].text = "ready?";
                         }
                         else {
                             this.playerText[pId].text = this.buttons[this.playerButtonId[id]];
                         }
                     }
                     else if (x === padMap['action']) {
-                        this.playerText[pId].text = "ready!";
-                        this.isActive[pId] = true;
-                        this.playerButtons[pId].frame = 1;
+                        if (pId == 0 && this.isActive[0]) {
+                            for (let k in this.playerz) {
+                                this.game.players.push(this.playerz[k]);
+                            }
+                            this.game.state.start('GameState');
+                        }
+                        else {
+                            this.playerText[pId].text = (pId == 0 ? "press 'action' to begin" : "ready!");
+                            this.isActive[pId] = true;
+                            this.playerButtons[pId].frame = 1;
+                        }
                     }
                 }
             });

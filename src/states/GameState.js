@@ -8,6 +8,7 @@ import Timer from 'objects/Timer';
 
 class GameState extends Phaser.State {
     create() {
+		this.game.add.image(0, 0, 'bgFrame');
 		this.playerObjects = [];
 		this.countdown = 99;
 		this.createMap();
