@@ -1,6 +1,7 @@
 /// <reference path="../../node_modules/phaser/typescript/phaser.d.ts" />
 import Grid from 'objects/Grid';
 import MapConsts from 'consts/MapConsts';
+import Map from 'objects/Map';
 import Player, {PlayerInfo} from 'objects/Player';
 
 class GameState extends Phaser.State {
@@ -13,11 +14,7 @@ class GameState extends Phaser.State {
 	}
 	
 	createMap(){
-		var map = this.game.add.tilemap('myTileMap');
-        map.addTilesetImage('tileset', 'tiles');
-        var layer = map.createLayer('tiles');
-        layer.resizeWorld();
-        layer.wrap = true;
+		this.mapa = new Map(this.game, 10, 10);
 	}
 	
 	addPlayerByInfo (playerInfo) {
@@ -26,6 +23,28 @@ class GameState extends Phaser.State {
 		console.log(this.game);
 		this.playerObjects.push (new Player(this.game, playerInfo, pos.x, pos.y));
 	}
+	
+	tileAt(targetTileX, targetTileY) {
+		return this.mapa.tileAt(targetTileX, targetTileY);
+	}
+	
+	playerTile(player) {
+		return tileAt(player.targetTileX, player.targetTileY);
+	}
+	
+	divideInto(player, targetTileX, targetTileY) {
+		let srcTile = playerTile(player);
+		let targetTile = tileAt(targetTileX, targetTileY);
+		
+		let healthToMove = Math.floor(targetTile.health / 2);
+		if (tile.isFree()) {
+			targetTile.populate(player, healthToMove);
+			srcTile.health -= healthToMove;
+		}
+	}
+	
+	
+	
 }
 
 export default GameState;
