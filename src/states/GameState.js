@@ -42,9 +42,6 @@ class GameState extends Phaser.State {
 			srcTile.health -= healthToMove;
 		}
 	}
-	
-	
-	
 }
 
 export default GameState;
