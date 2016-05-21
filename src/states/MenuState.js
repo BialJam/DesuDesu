@@ -3,11 +3,9 @@
 import MyButton from 'objects/Button';
 
 class MenuState extends Phaser.State {
-
     preload() {
         this.game.load.spritesheet('startBtn', 'assets/button.png', 120, 80);
         this.game.load.image('background', 'assets/tile.png');
-
     }
 
     create() {
@@ -16,7 +14,6 @@ class MenuState extends Phaser.State {
         let startButton = new MyButton(this.game);
         startButton.create(center.x, center.y, 'startBtn', startOnClick);
     }
-
 }
 
 function startOnClick() {

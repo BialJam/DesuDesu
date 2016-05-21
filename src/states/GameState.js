@@ -3,13 +3,6 @@ import Grid from 'objects/Grid';
 import Player from 'objects/Player';
 
 class GameState extends Phaser.State {
-	preload () {
-		this.game.load.tilemap('myTileMap', 'assets/level11.json', null, Phaser.Tilemap.TILED_JSON);		
-		this.game.load.image('tiles', 'assets/tileset.png');
-		
-		this.load.spritesheet('cursor', 'assets/cursor.png', 16, 16, 4);		
-	}
-	
 	create() {
 		let player1 = new Player(this.game);
 		player1.create();
