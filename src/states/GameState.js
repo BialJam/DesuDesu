@@ -23,6 +23,28 @@ class GameState extends Phaser.State {
 		console.log(this.game);
 		this.playerObjects.push (new Player(this.game, playerInfo, pos.x, pos.y));
 	}
+	
+	tileAt(targetTileX, targetTileY) {
+		return {player: null, health: 100, sprite: null, isFree: function() {this.player == null}, populate(player, health) { this.player = player; this.health = health;}};
+	}
+	
+	playerTile(player) {
+		return tileAt(player.targetTileX, player.targetTileY);
+	}
+	
+	divideInto(player, targetTileX, targetTileY) {
+		let srcTile = playerTile(player);
+		let targetTile = tileAt(targetTileX, targetTileY);
+		
+		let healthToMove = Math.floor(targetTile.health / 2);
+		if (tile.isFree()) {
+			targetTile.populate(player, healthToMove);
+			srcTile.health -= healthToMove;
+		}
+	}
+	
+	
+	
 }
 
 export default GameState;
