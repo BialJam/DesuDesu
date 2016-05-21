@@ -14,6 +14,11 @@ class LoadingScreen extends Phaser.State {
         this.load.image('background-menu', 'assets/tile.png');
         // prefix loaded sprites with names of state/object
         this.load.image('loading-2', 'assets/loading/2.png');
+        
+        this.game.load.tilemap('myTileMap', 'assets/level11.json', null, Phaser.Tilemap.TILED_JSON);		
+		this.game.load.image('tiles', 'assets/tileset.png');
+		
+		this.load.spritesheet('cursor', 'assets/cursor.png', 16, 16, 4);	
     }
 
     afterLoaded() {
@@ -52,7 +57,7 @@ class LoadingScreen extends Phaser.State {
 
     create() {
         this.barUpdate(100);
-        this.state.start('MenuState');
+        this.state.start('GameState');
     }
 };
 

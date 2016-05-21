@@ -4,11 +4,6 @@ import MapConsts from 'consts/MapConsts';
 import Player from 'objects/Player';
 
 class GameState extends Phaser.State {
-    preload(){
-		this.game.load.tilemap('myTileMap', 'assets/level11.json', null, Phaser.Tilemap.TILED_JSON);		
-		this.game.load.image('myTiles', 'assets/tileset.png');
-	}
-
     create() {
 		this.players = [];
     	this.game.input.gamepad.start();
@@ -16,14 +11,10 @@ class GameState extends Phaser.State {
 		this.game.input.gamepad.onConnectCallback = this.addPlayer;
 
 		var map = this.game.add.tilemap('myTileMap');
-        map.addTilesetImage('tiles', 'myTiles');
-        var layer = map.createLayer('layer');
+        map.addTilesetImage('tileset', 'tiles');
+        var layer = map.createLayer('tiles');
         layer.resizeWorld();
         layer.wrap = true;
-	}
-	
-	preload () {
-		this.load.spritesheet('cursor', 'assets/cursor.png', 32, 32, 4);
 	}
 	
 	addPlayer (id) {
