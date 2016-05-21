@@ -21,7 +21,7 @@ class GameMap extends Phaser.Group {
     }
 
     tileAt(targetTileX, targetTileY) {
-        return this.mapData[targetTileY * this.xSize + targetTileY];
+        return this.mapData[targetTileX * this.xSize + targetTileY];
     }
 
     scores() {
