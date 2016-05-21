@@ -26,6 +26,9 @@ class LoadingScreen extends Phaser.State {
         
         this.game.load.spritesheet('colorButtons', 'assets/colorButtonSpritesheet.png', 64, 64); 
         this.game.load.spritesheet('startGameSpritesheet', 'assets/startGameSpritesheet.png', 248, 64); 
+        
+        this.game.load.image('bg', 'assets/bg.png');
+        this.game.load.image('bgFrame', 'assets/bgFrame.png');
 }
 
     afterLoaded() {

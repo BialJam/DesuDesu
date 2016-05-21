@@ -6,6 +6,7 @@ import Player, {PlayerInfo} from 'objects/Player';
 class MenuState extends Phaser.State {
     create() {
         // this.game.add.tileSprite(0, 0, 960, 640, 'background-menu');
+        this.game.add.image(0, 0, 'bg');
         let center = { x: this.game.world.centerX, y: this.game.world.centerY };
         this.playersColors = ['0x12fe00', '0xfff859', '0x0decfe', '0xfe544f'];
         this.buttons = ['any', 'up', 'down', 'left', 'right', 'action'];
