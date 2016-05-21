@@ -9,7 +9,7 @@ var _ = require("underscore");
 class Game extends Phaser.Game {
 
 	constructor() {
-		super(800, 600, Phaser.AUTO, 'content', null);
+		super(960, 640, Phaser.AUTO, 'content', null);
 		this.state.add('LoadingScreen', LoadingScreen, false);
 		this.state.add('MenuState', MenuState, false);
 		this.state.add('GameState', GameState, false);
