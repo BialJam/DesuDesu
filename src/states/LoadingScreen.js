@@ -19,6 +19,8 @@ class LoadingScreen extends Phaser.State {
 		this.game.load.image('tiles', 'assets/tileset.png');
 		
 		this.load.spritesheet('cursor', 'assets/cursor.png', 32, 32, 4);	
+        
+        this.game.load.audio('themeAudio', 'assets/audio/themeAudio.mp3');        
     }
 
     afterLoaded() {
@@ -56,6 +58,8 @@ class LoadingScreen extends Phaser.State {
     }
 
     create() {
+        var themeAudio = this.game.add.audio("themeAudio");
+        themeAudio.loopFull(0.6);
         this.barUpdate(100);
         this.state.start('MenuState');
     }
