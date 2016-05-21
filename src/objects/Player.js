@@ -4,6 +4,7 @@ import MapConsts from 'consts/MapConsts.js';
 
 class Player extends Phaser.Group {
     constructor (game, color, pad, posx, posy) {
+        super(game);
         this.game = game;
         this.gridPosX = posx;
         this.gridPosY = posy;
