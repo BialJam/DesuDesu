@@ -24,7 +24,7 @@ class Tile extends Phaser.Group {
     }
 
     isFree() {
-        return player == null;
+        return this.player == null;
     }
 
     populate(player, health) {
@@ -37,6 +37,9 @@ class Tile extends Phaser.Group {
     
     depopulate(health) {
         this.health = Math.max(0, this.health - health);
+        if (this.health === 0) {
+            this.player = null;
+        }
     }
     
     updateSprite () {
