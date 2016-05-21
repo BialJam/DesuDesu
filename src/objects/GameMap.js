@@ -5,6 +5,8 @@ import Tile from 'objects/Tile.js';
 class GameMap extends Phaser.Group {
     constructor(game, xSize, ySize) {
         super(game);
+        this.xSize = xSize;
+        this.ySize = ySize;
         let index = 0;
         this.mapData = Array
             .apply(null, Array(xSize * ySize))
@@ -19,7 +21,7 @@ class GameMap extends Phaser.Group {
     }
 
     tileAt(targetTileX, targetTileY) {
-        return this.mapData[targetTileY * xSize + targetTileY];
+        return this.mapData[targetTileY * this.xSize + targetTileY];
     }
 
     scores() {

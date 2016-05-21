@@ -3,7 +3,6 @@ import MapConsts from 'consts/MapConsts';
 class Tile extends Phaser.Group {
     constructor(game, gridPosX, gridPosY) {
         super(game);
-        console.log(game);
         this.sprite = new Phaser.Sprite(
             this.game,
             gridPosX * MapConsts.Size,
@@ -17,6 +16,7 @@ class Tile extends Phaser.Group {
         this.sprite.addChild(healthText);
         this.player = null;
         this.health = 0;
+        this.updateSprite();
     }
     
     isHabitable() {
@@ -33,6 +33,7 @@ class Tile extends Phaser.Group {
         }
         this.player = player;
         this.health += health;
+        this.updateSprite();
     }
     
     depopulate(health) {
@@ -40,6 +41,7 @@ class Tile extends Phaser.Group {
         if (this.health === 0) {
             this.player = null;
         }
+        this.updateSprite();
     }
     
     updateSprite () {
