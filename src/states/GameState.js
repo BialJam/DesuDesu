@@ -2,6 +2,7 @@
 import Grid from 'objects/Grid';
 import MapConsts from 'consts/MapConsts';
 import Player from 'objects/Player';
+import Map from 'objects/Map';
 
 class GameState extends Phaser.State {
     create() {
@@ -22,11 +23,7 @@ class GameState extends Phaser.State {
 	}
 	
 	createMap(){
-		var map = this.game.add.tilemap('myTileMap');
-        map.addTilesetImage('tileset', 'tiles');
-        var layer = map.createLayer('tiles');
-        layer.resizeWorld();
-        layer.wrap = true;
+		this.mapa = new Map(this.game, 10, 10);
 	}
 }
 
