@@ -7,8 +7,7 @@ class MenuState extends Phaser.State {
     create() {
         this.game.add.tileSprite(0, 0, 960, 640, 'background-menu');
         let center = { x: this.game.world.centerX, y: this.game.world.centerY };
-        let startButton = new MyButton(this.game, center.x, center.y, 'startBtn-menu', startOnClick, this);
-        startButton.addText('Rozpocznij grę', 24);
+        let startButton = new MyButton(this.game, 356, center.y, 'startGameSpritesheet', startOnClick, this, 0, 0, 1);
 
         this.playersColors = ['0x12fe00', '0xfff859', '0x0decfe', '0xfe544f'];
         this.isActive = [false, false, false, false];
@@ -28,9 +27,9 @@ class MenuState extends Phaser.State {
         // let playersInfo = new Phaser.Text(this.game, 50, 25, 'Obecnie podłączeni gracze: ' + this.game.players.length, { font: "32px Arial", fill: "#ffffff" });
         // this.game.add.existing(playersInfo);
         this.bluePlayer = this.game.add.button(256, 200, 'colorButtons', this.onClickBlue, this, 0, 0, 1);
-        this.greenPlayer = this.game.add.button(384, 200, 'colorButtons', this.onClickGreen, this, 2, 2, 3);
-        this.redPlayer = this.game.add.button(512, 200, 'colorButtons', this.onClickRed, this, 4, 4, 5);
-        this.yellowPlayer = this.game.add.button(640, 200, 'colorButtons', this.onClickYellow, this, 6, 6, 7);
+        this.greenPlayer = this.game.add.button(384, 200, 'colorButtons', this.onClickGreen, this, 0, 0, 1);
+        this.redPlayer = this.game.add.button(512, 200, 'colorButtons', this.onClickRed, this, 0, 0, 1);
+        this.yellowPlayer = this.game.add.button(640, 200, 'colorButtons', this.onClickYellow, this, 0, 0, 1);
     }
 
     onClickRed() {

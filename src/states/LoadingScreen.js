@@ -9,7 +9,7 @@ class LoadingScreen extends Phaser.State {
         this.load.image('loading-bar', 'assets/loading/bar.png');
         this.load.addSyncPoint('image', 'loading-bar');
         this.load.onFileComplete.add(this.afterLoaded, this);
-        this.load.spritesheet('startBtn-menu', 'assets/button.png', 120, 80);
+        //this.load.spritesheet('startBtn-menu', 'assets/button.png', 120, 80);
         this.load.image('background-menu', 'assets/tile.png');
         // prefix loaded sprites with names of state/object
         this.load.image('loading-2', 'assets/loading/2.png');
@@ -25,6 +25,7 @@ class LoadingScreen extends Phaser.State {
         this.game.load.audio('themeAudio', 'assets/audio/themeAudio.mp3');        
         
         this.game.load.spritesheet('colorButtons', 'assets/colorButtonSpritesheet.png', 64, 64); 
+        this.game.load.spritesheet('startGameSpritesheet', 'assets/startGameSpritesheet.png', 248, 64); 
 }
 
     afterLoaded() {
