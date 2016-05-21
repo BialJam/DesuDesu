@@ -14,8 +14,6 @@ class GameState extends Phaser.State {
     	this.game.input.gamepad.start();
 		this.game.input.gamepad.callbackContext = this;
 		this.game.input.gamepad.onConnectCallback = this.addPlayer;
-		// debug
-		this.game.stage.backgroundColor = "#ff00ff";
 
 		var map = this.game.add.tilemap('myTileMap');
         map.addTilesetImage('tiles', 'myTiles');

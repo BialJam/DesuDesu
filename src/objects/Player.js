@@ -2,9 +2,8 @@
 import MapConsts from 'consts/MapConsts.js';
 
 
-class Player extends Phaser.Group {
+class Player {
     constructor (game, color, pad, posx, posy) {
-        super(game);
         this.game = game;
         this.gridPosX = posx;
         this.gridPosY = posy;
@@ -17,8 +16,6 @@ class Player extends Phaser.Group {
         this.sprite.animations.play('cycle', 8, true);
         
         this.pad = pad;
-        
-        this.addChild(this.sprite);
     }
 }
 
