@@ -2,7 +2,7 @@
 
 import Tile from 'objects/Tile.js';
 
-class Map extends Phaser.Group{
+class GameMap extends Phaser.Group{
     constructor (game, xSize, ySize) {
         super(game);
         let index = 0;
@@ -19,6 +19,19 @@ class Map extends Phaser.Group{
     
     tileAt(targetTileX, targetTileY) {
         return this.mapData[targetTileY * xSize + targetTileY];
+    }
+    
+    scores() {
+        let playerToScore = new Map();
+        for (let i = 0; i < this.mapData.length; ++i) {
+            let tile = this.mapData[i];
+            if (!tile.isFree()) {
+                let player = tile.player;
+                let newScore = playerToScore.get(player) || 0;
+                playerToScore.set(player, newScore);
+            }
+        }
+        return playerToScore;
     }
 }
 

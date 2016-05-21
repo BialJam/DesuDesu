@@ -1,7 +1,7 @@
 /// <reference path="../../node_modules/phaser/typescript/phaser.d.ts" />
 import Grid from 'objects/Grid';
 import MapConsts from 'consts/MapConsts';
-import Map from 'objects/Map';
+import GameMap from 'objects/GameMap';
 import Player, {PlayerInfo} from 'objects/Player';
 
 class GameState extends Phaser.State {
@@ -14,7 +14,7 @@ class GameState extends Phaser.State {
 	}
 	
 	createMap(){
-		this.mapa = new Map(this.game, 10, 10);
+		this.mapa = new GameMap(this.game, 10, 10);
 	}
 	
 	addPlayerByInfo (playerInfo) {
@@ -29,6 +29,10 @@ class GameState extends Phaser.State {
 	
 	playerTile(player) {
 		return tileAt(player.targetTileX, player.targetTileY);
+	}
+	
+	playersScore() {
+		return this.mapa.scores();
 	}
 	
 	divideInto(player, targetTileX, targetTileY) {
