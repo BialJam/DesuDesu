@@ -30,7 +30,10 @@ class GameState extends Phaser.State {
 	addPlayerByInfo(playerInfo) {
 		let id = playerInfo.id;
 		let pos = MapConsts.StartingPositions[id];
-		this.playerObjects.push(new Player(this.game, playerInfo, pos.x, pos.y));
+		let player = new Player(this.game, playerInfo, pos.x, pos.y);
+		let startTile = playerTile(player);
+		startTile.populate(player, MapConsts.StartHealth);
+		this.playerObjects.push(player);
 	}
 	timerStart() {
 		let timer = this.game.time.create(false);
@@ -46,7 +49,6 @@ class GameState extends Phaser.State {
 		if (this.countdown == 0 || Array.from(score.entries()).length <= 1) {
 			this.finishGame(score);
 		}
-		
 	}
 	
 	finishGame(scores) {
