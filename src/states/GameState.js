@@ -1,7 +1,7 @@
 /// <reference path="../../node_modules/phaser/typescript/phaser.d.ts" />
 import Grid from 'objects/Grid';
 import MapConsts from 'consts/MapConsts';
-import Player from 'objects/Player';
+import Player, {PlayerInfo} from 'objects/Player';
 
 class GameState extends Phaser.State {
     create() {
@@ -11,6 +11,7 @@ class GameState extends Phaser.State {
 		this.game.input.gamepad.onConnectCallback = this.addPlayer;
 
 		this.createMap();
+		this.addPlayerByInfo(new PlayerInfo(this.game.input.gamepad['pad' + 0], MapConsts.StartingPositions[0], 0));
 	}
 	
 	addPlayer (id) {
@@ -27,6 +28,13 @@ class GameState extends Phaser.State {
         var layer = map.createLayer('tiles');
         layer.resizeWorld();
         layer.wrap = true;
+	}
+	
+	addPlayerByInfo (playerInfo) {
+		let id = playerInfo.id;
+		let pos = MapConsts.StartingPositions[id];
+		console.log(this.game);
+		this.players.push (new Player(this.game, playerInfo, pos.x, pos.y));
 	}
 }
 
