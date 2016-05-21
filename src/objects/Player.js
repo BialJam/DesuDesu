@@ -8,6 +8,12 @@ export class PlayerInfo {
         this.id = id;
         this.padMapping = padMapping;
     }
+    get colorNum () {
+        return MapConsts.StartingPositions[this.id].colorNum;
+    }
+    get colorStr () {
+        return MapConsts.StartingPositions[this.id].colorStr;
+    }
 }
 
 class Player extends Phaser.Group {

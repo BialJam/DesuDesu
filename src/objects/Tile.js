@@ -45,7 +45,7 @@ class Tile extends Phaser.Group {
     
     updateSprite () {
         if (this.player !== null) {
-            this.sprite.tint = this.player.color;
+            this.sprite.tint = this.player.info.colorNum;
             this.healthText.text = this.health; 
         }
     }
