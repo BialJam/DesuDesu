@@ -62,6 +62,7 @@ class MenuState extends Phaser.State {
                     else if (x === padMap['action']) {
                         if (pId == 0 && this.isActive[0]) {
                             for (let k in this.playerz) {
+                                this.playerz[k].pad.onDownCallback = null;
                                 this.game.players.push(this.playerz[k]);
                             }
                             this.game.state.start('GameState');

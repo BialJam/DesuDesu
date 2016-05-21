@@ -28,6 +28,9 @@ class Player extends Phaser.Group {
         this.sprite.animations.add('cycle');
         this.sprite.animations.play('cycle', 8, true);
         this.addChild(this.sprite);
+        // this.info.pad.addCallback(this, {
+        //     onDown : x => this.keys['action'] = true;
+        // })
     }
     
     moveUp() {
