@@ -22,7 +22,6 @@ class MenuState extends Phaser.State {
 
 function startOnClick() {
     console.log('DUPA1');
-    this.game.state.start('GameState');
     this.game.state.start('LoadingScreen');
 }
 
