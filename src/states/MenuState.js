@@ -10,7 +10,7 @@ class MenuState extends Phaser.State {
         let startButton = new MyButton(this.game, center.x, center.y, 'startBtn-menu', startOnClick, this);
         startButton.addText('Rozpocznij grę', 24);
 
-        this.playersColors = ['0xff0000', '0x00ff00', '0x0000ff', '0xff00ff'];
+        this.playersColors = ['0x12fe00', '0xfff859', '0x0decfe', '0xfe544f'];
         this.game.input.gamepad.start();
         this.game.input.gamepad.callbackContext = this;
         this.game.input.gamepad.onConnectCallback = this.addPlayer;
