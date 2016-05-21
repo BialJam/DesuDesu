@@ -42,6 +42,7 @@ class MenuState extends Phaser.State {
         let pPad = this.game.input.gamepad['pad' + id];
         let p = new Player(this.game, pData.color, pPad, pData.x, pData.y);
         this.players.push(p);
+        console.log("pad connected");
         infoPlayers.Text = 'Obecnie podłączeni gracze: ' + c;
     }
 }
