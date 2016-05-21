@@ -29,7 +29,7 @@ class MenuState extends Phaser.State {
     }
 
     update() {
-        if (this.game.input.gamepad.supported && this.game.input.gamepad.active && this.game.input.gamepad['pad1'] && this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_1) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_0) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_2) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_3) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_A) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_B) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_X) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_Y)) {
+        if (this.game.input.gamepad.supported && this.game.input.gamepad.active && this.game.input.gamepad['pad1'] && this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_1) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_0) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_2) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_3) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_A) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_B) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_X) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_Y) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.PS3XC_SQUARE) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.PS3XC_CIRCLE) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.PS3XC_TRIANGLE) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.PS3XC_X)) {
             console.log('DUPA3');
             this.game.state.start('GameState');
         }
