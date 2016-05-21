@@ -2,8 +2,8 @@
 
 import Tile from 'objects/Tile.js';
 
-class GameMap extends Phaser.Group{
-    constructor (game, xSize, ySize) {
+class GameMap extends Phaser.Group {
+    constructor(game, xSize, ySize) {
         super(game);
         let index = 0;
         this.mapData = Array
@@ -13,14 +13,15 @@ class GameMap extends Phaser.Group{
                 index++;
                 return tile;
             });
-            
-        this.mapData.forEach(x => this.addChild(x));
+        console.log(this.mapData);
+
+        this.mapData.forEach(x => { this.addChild(x); });
     }
-    
+
     tileAt(targetTileX, targetTileY) {
         return this.mapData[targetTileY * xSize + targetTileY];
     }
-    
+
     scores() {
         let playerToScore = new Map();
         for (let i = 0; i < this.mapData.length; ++i) {
@@ -35,4 +36,4 @@ class GameMap extends Phaser.Group{
     }
 }
 
-export default Map;
+export default GameMap;
