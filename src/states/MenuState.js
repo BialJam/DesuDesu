@@ -25,21 +25,33 @@ class MenuState extends Phaser.State {
             }
         }
 
-        let playersInfo = new Phaser.Text(this.game, 50, 25, 'Obecnie podłączeni gracze: ' + this.game.players.length, { font: "32px Arial", fill: "#ffffff" });
-        this.game.add.existing(playersInfo);
-        var bluePlayer = this.game.add.button(100, 200, 'colorButtons', this.onClickBlue, this, 0, 0, 1);   
-        var greenPlayer = this.game.add.button(180, 200, 'colorButtons', this.onClickGreen, this, 2, 2, 3);    
-        var redPlayer = this.game.add.button(260, 200, 'colorButtons', this.onClickRed, this, 4, 4, 5);    
-        var yellowPlayer = this.game.add.button(340, 200, 'colorButtons', this.onClickYellow, this, 6, 6, 7);    
-}
-    
-    onClickRed(){console.log("red")}
-    onClickBlue(){console.log("blue")}
-    onClickGreen(){console.log("green")}
-    onClickYellow(){console.log("yellow")}
+        // let playersInfo = new Phaser.Text(this.game, 50, 25, 'Obecnie podłączeni gracze: ' + this.game.players.length, { font: "32px Arial", fill: "#ffffff" });
+        // this.game.add.existing(playersInfo);
+        this.bluePlayer = this.game.add.button(100, 200, 'colorButtons', this.onClickBlue, this, 0, 0, 1);
+        this.greenPlayer = this.game.add.button(180, 200, 'colorButtons', this.onClickGreen, this, 2, 2, 3);
+        this.redPlayer = this.game.add.button(260, 200, 'colorButtons', this.onClickRed, this, 4, 4, 5);
+        this.yellowPlayer = this.game.add.button(340, 200, 'colorButtons', this.onClickYellow, this, 6, 6, 7);
+    }
+
+    onClickRed() {
+        console.log("red");
+        this.redPlayer.frame = 5;
+    }
+    onClickBlue() {
+        console.log("blue");
+        this.bluePlayer.frame = 1;
+    }
+    onClickGreen() {
+        console.log("green");
+        this.greenPlayer.frame = 3;
+    }
+    onClickYellow() {
+        console.log("yellow");
+        this.yellowPlayer.frame = 7;
+    }
 
     update() {
-        if(this.game.players[0] != undefined) {
+        if (this.game.players[0] != undefined) {
             var firstPadId = this.game.players[0].id;
             console.log('first pad id: ' + firstPadId);
         }
@@ -54,6 +66,18 @@ class MenuState extends Phaser.State {
                 let pPad = this.game.input.gamepad['pad' + (id + 1)];
                 let p = new PlayerInfo(pPad, this.playersColors[id], id);
                 this.game.players.push(p);
+                if (this.game.players[0] != undefined) {
+                    this.onClickBlue();
+                }
+                if (this.game.players[1] != undefined) {
+                    this.onClickGreen();
+                }
+                if (this.game.players[2] != undefined) {
+                    this.onClickRed();
+                }
+                if (this.game.players[3] != undefined) {
+                    this.onClickYellow();
+                }
             }
         }
     }
