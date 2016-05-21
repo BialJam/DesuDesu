@@ -5,21 +5,11 @@ import Player, {PlayerInfo} from 'objects/Player';
 
 class GameState extends Phaser.State {
     create() {
-		this.players = [];
-    	this.game.input.gamepad.start();
-		this.game.input.gamepad.callbackContext = this;
-		this.game.input.gamepad.onConnectCallback = this.addPlayer;
-
+		this.playerObjects = [];
 		this.createMap();
-		this.addPlayerByInfo(new PlayerInfo(this.game.input.gamepad['pad' + 0], MapConsts.StartingPositions[0], 0));
-	}
-	
-	addPlayer (id) {
-		let c = this.players.length;
-		let pData = MapConsts.StartingPositions[c];
-		let pPad = this.game.input.gamepad['pad' + id];
-		let p = new Player(this.game, pData.color, pPad, pData.x, pData.y);
-		this.players.push(p);
+		for (let i = 0; i < this.game.players.length; ++i) {
+			this.addPlayerByInfo(this.game.players[i]);
+		}
 	}
 	
 	createMap(){
@@ -34,7 +24,7 @@ class GameState extends Phaser.State {
 		let id = playerInfo.id;
 		let pos = MapConsts.StartingPositions[id];
 		console.log(this.game);
-		this.players.push (new Player(this.game, playerInfo, pos.x, pos.y));
+		this.playerObjects.push (new Player(this.game, playerInfo, pos.x, pos.y));
 	}
 }
 
