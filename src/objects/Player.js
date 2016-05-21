@@ -1,7 +1,7 @@
 /// <reference path="../../node_modules/phaser/typescript/phaser.d.ts" />
 import MapConsts from 'consts/MapConsts.js';
 
-class PlayerInfo {
+export class PlayerInfo {
     constructor(pad, color, id) {
         this.pad = pad;
         this.color = color;
