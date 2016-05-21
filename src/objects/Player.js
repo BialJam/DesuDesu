@@ -2,20 +2,22 @@
 import MapConsts from 'consts/MapConsts.js';
 
 
-class Player extends Phaser.Sprite {
-    constructor (game) {
-        super(game);
-        this.gridPosX = 0;
-        this.gridPosY = 0;
-    }
-    
-    create () {
+class Player extends Phaser.Group {
+    constructor (game, color, pad, posx, posy) {
+        this.game = game;
+        this.gridPosX = posx;
+        this.gridPosY = posy;
         this.sprite = this.game.add.sprite(
-            100,
-            150,
+            this.gridPosX * MapConsts.Size,
+            this.gridPosY * MapConsts.Size,
             'cursor');
+        this.sprite.tint = color;
         this.sprite.animations.add('cycle');
         this.sprite.animations.play('cycle', 8, true);
+        
+        this.pad = pad;
+        
+        this.addChild(this.sprite);
     }
 }
 

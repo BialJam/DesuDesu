@@ -1,5 +1,6 @@
 /// <reference path="../../node_modules/phaser/typescript/phaser.d.ts" />
 import Grid from 'objects/Grid';
+import MapConsts from 'consts/MapConsts';
 import Player from 'objects/Player';
 
 class GameState extends Phaser.State {
@@ -9,10 +10,13 @@ class GameState extends Phaser.State {
 	}
 
     create() {
-		let player1 = new Player(this.game);
-		player1.create();
-		let center = { x: this.game.world.centerX, y: this.game.world.centerY }
-		
+		this.players = [];
+    	this.game.input.gamepad.start();
+		this.game.input.gamepad.callbackContext = this;
+		this.game.input.gamepad.onConnectCallback = this.addPlayer;
+		// debug
+		this.game.stage.backgroundColor = "#ff00ff";
+
 		var map = this.game.add.tilemap('myTileMap');
         map.addTilesetImage('tiles', 'myTiles');
         var layer = map.createLayer('layer');
@@ -21,7 +25,15 @@ class GameState extends Phaser.State {
 	}
 	
 	preload () {
-		this.load.spritesheet('cursor', 'assets/cursor.png', 16, 16, 4);
+		this.load.spritesheet('cursor', 'assets/cursor.png', 32, 32, 4);
+	}
+	
+	addPlayer (id) {
+		let c = this.players.length;
+		let pData = MapConsts.StartingPositions[c];
+		let pPad = this.game.input.gamepad['pad' + id];
+		let p = new Player(this.game, pData.color, pPad, pData.x, pData.y);
+		this.players.push(p);
 	}
 }
 
