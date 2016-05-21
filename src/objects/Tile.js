@@ -24,7 +24,7 @@ class Tile extends Phaser.Group {
     }
 
     isFree() {
-        return player == null;
+        return this.player == null;
     }
 
     populate(player, health) {
