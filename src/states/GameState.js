@@ -36,35 +36,35 @@ class GameState extends Phaser.State {
 		this.countdown--;
         console.log("Timer: " + this.countdown);
 		this.timerLabel.changeTimer(this.countdown);
-	}	
+	}
 	tileAt(targetTileX, targetTileY) {
 		return this.mapa.tileAt(targetTileX, targetTileY);
 	}
-	
+
 	playerTile(player) {
 		return tileAt(player.targetTileX, player.targetTileY);
 	}
-	
+
 	playersScore() {
 		return this.mapa.scores();
 	}
-	
+
 	divideInto(player, targetTileX, targetTileY) {
 		let srcTile = playerTile(player);
 		let targetTile = tileAt(targetTileX, targetTileY);
 		if (!targetTile.isHabitable())
 			return;
-		
+
 		let healthToMove = Math.floor(targetTile.health / 2);
-		if (healthToMove == 0)
+		if (healthToMove == 0) {
 			return;
-		
+		}
+
 		if (targetTile.isFree() || player.ownsTile(targetTile)) {
 			srcTile.depopulate(healthToMove);
 			targetTile.populate(player, healthToMove);
 		}
 		else {
-			
 			let healthToTake = Math.min(targetTile.health, healthToMove);
 			srcTile.depopulate(healthToMove);
 			targetTile.depopulate(healthToTake);
