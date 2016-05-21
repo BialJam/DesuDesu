@@ -30,7 +30,7 @@ class GameMap extends Phaser.Group {
             let tile = this.mapData[i];
             if (!tile.isFree()) {
                 let player = tile.player;
-                let newScore = playerToScore.get(player) || 0;
+                let newScore = playerToScore.get(player) || tile.health;
                 playerToScore.set(player, newScore);
             }
         }
