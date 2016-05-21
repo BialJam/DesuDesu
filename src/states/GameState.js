@@ -24,7 +24,7 @@ class GameState extends Phaser.State {
 	}
 
 	createMap() {
-		this.mapa = new GameMap(this.game, 10, 10);
+		this.mapa = new GameMap(this.game, 30, 20);
 	}
 
 	addPlayerByInfo(playerInfo) {
@@ -46,7 +46,7 @@ class GameState extends Phaser.State {
         console.log("Timer: " + this.countdown);
 		this.timerLabel.changeTimer(this.countdown);
 		let score = this.mapa.scores();
-		if (this.countdown == 0 || Array.from(score.entries()).length <= 1) {
+		if (this.countdown == 0 || Array.from(score.entries()).length == 1) {
 			this.finishGame(score);
 		}
 	}
@@ -61,7 +61,7 @@ class GameState extends Phaser.State {
 	}
 
 	playerTile(player) {
-		return this.tileAt(player.targetTileX, player.targetTileY);
+		return this.tileAt(player.tilePosX, player.tilePosX);
 	}
 
 	playersScore() {
