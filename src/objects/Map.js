@@ -16,6 +16,10 @@ class Map extends Phaser.Group{
             
         this.mapData.forEach(x => this.addChild(x));
     }
+    
+    tileAt(targetTileX, targetTileY) {
+        return this.mapData[targetTileY * xSize + targetTileY];
+    }
 }
 
 export default Map;

@@ -25,7 +25,7 @@ class GameState extends Phaser.State {
 	}
 	
 	tileAt(targetTileX, targetTileY) {
-		return {player: null, health: 100, sprite: null, isFree: function() {this.player == null}, populate(player, health) { this.player = player; this.health = health;}};
+		return this.mapa.tileAt(targetTileX, targetTileY);
 	}
 	
 	playerTile(player) {
