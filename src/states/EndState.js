@@ -14,14 +14,13 @@ class EndState extends Phaser.State {
 
          // test data
          //let winners = new Map();
-         //winners.set({info: {color: "#ffff00", id: 1}}, 100);
+         //winners.set([[{info: {color: "#ffff00", id: 1}}, 100]];
          
-        Array.prototype.filter.call(this.score.entries(), ([player, score]) => score == maxPts);
+        let winners = Array.prototype.filter.call(this.score.entries(), ([player, score]) => score == maxPts);
         
         let winnerIdx = 0;
-        let font = 
-        this.game.add.text( center.x - 150, center.y - 150, 'Winners:', font);
-        for (let [player, score] of winners.entries()) {
+        this.game.add.text( center.x - 150, center.y - 150, 'Winners:', { font: "48px Arial"});
+        for (let [player, score] of winners) {
             this.game.add.text( center.x - 120, center.y - 150 - winnerIdx * 40, 'Player ' + (player.info.id  + 1)+ ' score: ' + score, { font: "48px Arial", fill: player.info.color });
             winnerIdx++;
         }

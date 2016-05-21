@@ -31,7 +31,7 @@ class GameState extends Phaser.State {
 		let id = playerInfo.id;
 		let pos = MapConsts.StartingPositions[id];
 		let player = new Player(this.game, playerInfo, pos.x, pos.y);
-		let startTile = playerTile(player);
+		let startTile = this.playerTile(player);
 		startTile.populate(player, MapConsts.StartHealth);
 		this.playerObjects.push(player);
 	}
@@ -61,7 +61,7 @@ class GameState extends Phaser.State {
 	}
 
 	playerTile(player) {
-		return tileAt(player.targetTileX, player.targetTileY);
+		return this.tileAt(player.targetTileX, player.targetTileY);
 	}
 
 	playersScore() {
