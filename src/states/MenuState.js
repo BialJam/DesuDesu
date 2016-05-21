@@ -14,7 +14,7 @@ class MenuState extends Phaser.State {
         let startButton = new MyButton(this.game, center.x, center.y, 'startBtn-menu', startOnClick, this);
         startButton.addText('Rozpocznij grę', 24);
 
-        this.players = [];
+        this.players = 0;
         this.game.input.gamepad.start();
         
         let pads = this.game.input.gamepad.padsConnected;
@@ -22,7 +22,7 @@ class MenuState extends Phaser.State {
         console.log("connected pads: " + pads);
         if (pads > 0) {
             for (let i = 0; i < pads; ++i) {
-                this.addPlayer(i);
+                this.players++;
             }
         }
                 
@@ -35,12 +35,9 @@ class MenuState extends Phaser.State {
     }
 
     addPlayer(id) {
-        let c = this.players.length;
-        let pData = MapConsts.StartingPositions[c];
-        let pPad = this.game.input.gamepad['pad' + id];
-        let p = new Player(this.game, pData.color, pPad, pData.x, pData.y);
-        this.players.push(p);
-        console.log("pad connected");
+        let c = this.game.input.gamepad.padsConnected;
+        let pPad = this.game.input.gamepad['pad' + c];
+        console.log("pad connected " + c);
         infoPlayers.Text = 'Obecnie podłączeni gracze: ' + c;
     }
 }

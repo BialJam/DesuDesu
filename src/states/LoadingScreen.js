@@ -57,7 +57,7 @@ class LoadingScreen extends Phaser.State {
 
     create() {
         this.barUpdate(100);
-        this.state.start('GameState');
+        this.state.start('MenuState');
     }
 };
 
