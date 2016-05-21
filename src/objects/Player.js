@@ -13,6 +13,8 @@ class Player extends Phaser.Group {
     constructor (game, info, tilePosX, tilePosY) {
         super(game);
         this.info = info;
+        this.tilePosX = tilePosX;
+        this.tilePosY = tilePosY;
         this.position.set(tilePosX * MapConsts.Size, tilePosY * MapConsts.Size);
         this.sprite = new Phaser.Sprite(game, 0, 0, 'cursor');
         this.sprite.tint = info.color;
@@ -20,6 +22,26 @@ class Player extends Phaser.Group {
         this.sprite.animations.play('cycle', 8, true);
         
         this.addChild(this.sprite);
+    }
+    
+    moveUp() {
+        this.tilePosY -= 1;
+    }
+    
+    moveDown() {
+        this.tilePosY += 1;
+    }
+    
+    moveLeft() {
+        this.tilePosX -= 1;
+    }
+    
+    moveRight() {
+        this.tilePosX += 1;
+    }
+    
+    ownsTile(tile) {
+        return tile.player === this;
     }
 }
 
