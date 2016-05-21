@@ -36,7 +36,18 @@ class GameState extends Phaser.State {
 		this.countdown--;
         console.log("Timer: " + this.countdown);
 		this.timerLabel.changeTimer(this.countdown);
-	}	
+		let score = this.mapa.scores();
+		if (this.countdown == 0 || Array.from(score.entries()).length <= 1) {
+			this.finishGame(score);
+		}
+		
+	}
+	
+	finishGame(scores) {
+		this.game.state.states.EndState.setScore(scores);
+		this.game.state.start("EndState");
+	}
+	
 	tileAt(targetTileX, targetTileY) {
 		return this.mapa.tileAt(targetTileX, targetTileY);
 	}
