@@ -14,7 +14,7 @@ class MenuState extends Phaser.State {
         this.game.input.gamepad.start();
         this.game.input.gamepad.callbackContext = this;
         this.game.input.gamepad.onConnectCallback = this.addPlayer;
-        
+
         let pads = this.game.input.gamepad.padsConnected;
 
         console.log("connected pads: " + pads);
@@ -28,6 +28,13 @@ class MenuState extends Phaser.State {
         this.game.add.existing(playersInfo);
     }
 
+    update() {
+        if (this.game.input.gamepad.supported && this.game.input.gamepad.active && this.game.input.gamepad['pad1'] && this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_1) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_0) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_2) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.BUTTON_3) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_A) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_B) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_X) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.XBOX360_Y) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.PS3XC_SQUARE) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.PS3XC_CIRCLE) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.PS3XC_TRIANGLE) || this.game.input.gamepad['pad1'].isDown(Phaser.Gamepad.PS3XC_X)) {
+            console.log('DUPA3');
+            this.game.state.start('GameState');
+        }
+    }
+
     addPlayer(id) {
         console.log("pad connected ", id);
         let pPad = this.game.input.gamepad['pad' + (id + 1)];
@@ -37,7 +44,7 @@ class MenuState extends Phaser.State {
 }
 
 function startOnClick() {
-    console.log('DUPA1');
+    //console.log('DUPA1');
     this.game.state.start('GameState');
 }
 
