@@ -62,7 +62,7 @@ class GameState extends Phaser.State {
 	}
 
 	playerTile(player) {
-		return this.tileAt(player.tilePosX, player.tilePosX);
+		return this.tileAt(player.tilePosX, player.tilePosY);
 	}
 
 	playersScore() {
