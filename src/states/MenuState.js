@@ -41,10 +41,9 @@ class MenuState extends Phaser.State {
         if (!(id in this.playerz)) {
             console.log("new player");
             let pad = this.game.input.gamepad['pad' + (id + 1)];
-            let color = this.playersColors[this.playerNums];
             let padMap = {};
             let pId = this.playerNums;
-            this.playerz[id] = new PlayerInfo(pad, color, pId, padMap);
+            this.playerz[id] = new PlayerInfo(pad, pId, padMap);
             this.playerButtonId[id] = 0;
             this.playerNums++;
             pad.addCallbacks(this, {

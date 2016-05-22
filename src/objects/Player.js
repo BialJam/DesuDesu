@@ -2,11 +2,13 @@
 import MapConsts from 'consts/MapConsts.js';
 
 export class PlayerInfo {
-    constructor(pad, color, id, padMapping) {
+    constructor(pad, id, padMapping) {
         this.pad = pad;
-        this.color = color;
         this.id = id;
         this.padMapping = padMapping; // map pad key => button type string
+    }
+    get color() {
+        return this.colorNum;
     }
     get colorNum () {
         return MapConsts.StartingPositions[this.id].colorNum;
