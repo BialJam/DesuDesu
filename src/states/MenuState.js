@@ -40,10 +40,11 @@ class MenuState extends Phaser.State {
     padDownEvent(button, mysteryParameter, id) {
         if (!(id in this.playerz)) {
             console.log("new player");
-            let pad = this.game.input.gamepad['pad' + (id + 1)];
+            let padId = 'pad' + (id + 1);
+            let pad = this.game.input.gamepad[padId];
             let padMap = {};
             let pId = this.playerNums;
-            this.playerz[id] = new PlayerInfo(pad, pId, padMap);
+            this.playerz[id] = new PlayerInfo(padId, pId, padMap);
             this.playerButtonId[id] = 0;
             this.playerNums++;
             pad.addCallbacks(this, {
@@ -67,7 +68,8 @@ class MenuState extends Phaser.State {
                     else if ('action' === padMap[x]) {
                         if (pId == 0 && this.isActive[0]) {
                             for (let k in this.playerz) {
-                                this.playerz[k].pad.onDownCallback = null;
+                                let pPad = this.game.input.gamepad[this.playerz[k].padId];
+                                pPad.onDownCallback = null;
                                 if (this.isActive[pId])
                                     this.game.players.push(this.playerz[k]);
                             }

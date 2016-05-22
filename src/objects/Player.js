@@ -2,8 +2,8 @@
 import MapConsts from 'consts/MapConsts.js';
 
 export class PlayerInfo {
-    constructor(pad, id, padMapping) {
-        this.pad = pad;
+    constructor(padId, id, padMapping) {
+        this.padId = padId;
         this.id = id;
         this.padMapping = padMapping; // map pad key => button type string
     }
@@ -65,6 +65,10 @@ class Player extends Phaser.Group {
     }
     
     update() {
+    }
+    
+    getPad() {
+        return this.game.input.gamepad[this.info.padId];
     }
 }
 
