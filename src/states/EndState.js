@@ -23,7 +23,10 @@ class EndState extends Phaser.State {
 
         let winners = Array.prototype.filter.call(Array.from(this.score.entries()), ([player, score]) => score == maxPts);
 
-
+        this.game.input.gamepad.start();
+        this.game.input.gamepad.addCallbacks(this, {
+            onDown: this.padDownEvent
+        });
 
         let winnerIdx = 1;
         this.game.add.bitmapText(center.x - 135, center.y - 245, 'font', 'WINNERS:', 60);
@@ -33,6 +36,30 @@ class EndState extends Phaser.State {
             winnerIdx++;
         }
         this.game.add.bitmapText(center.x - 350, center.y + 200, 'font', 'Player 1 hit match button to replay!', 36);
+        let players = Array.from(this.score.keys());
+        for (let i = 0; i < players.length; i++) {
+            if (players[i].info.id === 0) {
+                this.firstPad = players[i].info.padId;
+                this.firstPadMap = players[i].info.padMap;
+            }
+        }
+    }
+
+    rematch() {
+        window.location.reload(false);
+    }
+
+    padDownEvent(button) {
+        let pad = this.game.input.gamepad[this.firstPad];
+        pad.addCallbacks(this, {
+            onDown: x => {
+                if(this.firstPadMap[x] === 'action') {
+                    this.rematch();
+                }
+            }
+        });
+
+        console.log("new player");
     }
 }
 
