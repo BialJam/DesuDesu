@@ -6,6 +6,7 @@ import ScoreTable from 'objects/ScoreTable';
 import Player, {PlayerInfo} from 'objects/Player';
 import Timer from 'objects/Timer';
 
+
 class GameState extends Phaser.State {
     create() {
 		this.game.add.image(0, 0, 'bgFrame');
@@ -22,6 +23,8 @@ class GameState extends Phaser.State {
 		this.scoreTable.changeScore(1, 0);
 		this.scoreTable.changeScore(2, 55);
 		this.scoreTable.changeScore(3, 99);
+		this.attackSound = this.game.add.audio('attackSound');
+        this.divideSound = this.game.add.audio('divideSound');
 	}
 
 	createMap() {
@@ -83,6 +86,7 @@ class GameState extends Phaser.State {
 		if (targetTile.isFree() || player.ownsTile(targetTile)) {
 			srcTile.depopulate(healthToMove);
 			targetTile.populate(player, healthToMove);
+			playDivideSound()
 		}
 		else {
 			let healthToTake = Math.min(targetTile.health, healthToMove);
@@ -92,7 +96,16 @@ class GameState extends Phaser.State {
 			if (healthToPopulate > 0) {
 				targetTile.populate(player, healthToPopulate);
 			}
+			playAttackSound();
 		}
+	}	
+	
+	playDivideSound(){
+		this.divideSound.play();
+	}
+	
+	playAttackSound(){
+		this.attackSound.play();
 	}
 }
 
