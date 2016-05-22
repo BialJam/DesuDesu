@@ -53,6 +53,7 @@ class MenuState extends Phaser.State {
             return;
         this.playerz.length = 0;
         let players = JSON.parse(localStorage.getItem("players"));
+        if (players == null) return;
         for (let i = 0; i < players.length; ++i) {
             players[i].id = i;
             this.playerButtonId[i] = this.buttons.length;
