@@ -113,13 +113,13 @@ class MenuState extends Phaser.State {
                         this.playerText[pId].text = this.buttons[this.playerButtonId[pId]];
                     }
                 }
-                else if ('action' /*=== playerInfo.padMap[x]*/) {
+                else {
                     if (pId == 0 && this.isActive[0]) {
                         this.clearCallbacks();
                         this.game.players = this.playerInfoArray();
                         this.game.state.start('GameState');
                     }
-                    else {
+                    else if (!this.isActive[pId]) {
                         this.playerText[pId].text = (pId == 0 ? "press 'action' to begin" : "ready!");
                         this.isActive[pId] = true;
                         this.playerButtons[pId].frame = 1;
