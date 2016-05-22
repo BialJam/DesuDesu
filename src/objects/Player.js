@@ -2,10 +2,11 @@
 import MapConsts from 'consts/MapConsts.js';
 
 export class PlayerInfo {
-    constructor(padId, id, padMap) {
+    constructor(padId, id, padMap, axisMap) {
         this.padId = padId;
         this.id = id;
-        this.padMap = padMap; // map pad key => button type string
+        this.padMap = padMap;
+        this.padAxisMap = axisMap; // map pad key => button type string
     }
     get color() {
         return this.colorNum;
