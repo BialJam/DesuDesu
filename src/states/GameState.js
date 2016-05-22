@@ -19,17 +19,14 @@ class GameState extends Phaser.State {
 		this.timerLabel = new Timer(this.game, 200, 200, 'timer');
 		this.timerStart();
 		this.scoreTable = new ScoreTable(this.game, 300, 300, 'scoreTable');
-		this.scoreTable.changeScore(0, 100);
-		this.scoreTable.changeScore(1, 101);
-		this.scoreTable.changeScore(2, 102);
-		this.scoreTable.changeScore(3, 103);
 		this.attackSound = this.game.add.audio('attackSound');
         this.divideSound = this.game.add.audio('divideSound');
 	}
 
 	createMap() {
-		this.mapa = new GameMap(this.game, 29, 18);
-		this.mapa.x += 16;
+		this.mapa = new GameMap(this.game, MapConsts.SizeX, MapConsts.SizeY);
+		this.mapa.scale.set(2,2);
+		this.mapa.x += 32;
 		this.mapa.y += 54;
 	}
 
@@ -53,6 +50,10 @@ class GameState extends Phaser.State {
         console.log("Timer: " + this.countdown);
 		this.timerLabel.changeTimer(this.countdown);
 		let score = this.mapa.scores();
+		let playersScore = Array.from(score.values());
+		for(let i = 0; i < playersScore.length; i++) {
+			this.scoreTable.changeScore(i, playersScore[i]);
+		}
 		if (this.countdown == 0 || Array.from(score.entries()).length == 1) {
 			this.finishGame(score);
 		}
@@ -78,6 +79,8 @@ class GameState extends Phaser.State {
 	divideInto(player, targetTileX, targetTileY) {
 		console.log("divide start");
 		let srcTile = this.playerTile(player);
+		if (srcTile.player !== player)
+			return;
 		let targetTile = this.tileAt(targetTileX, targetTileY);
 		if (!targetTile.isHabitable())
 			return;
