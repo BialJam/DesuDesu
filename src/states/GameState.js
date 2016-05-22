@@ -62,6 +62,9 @@ class GameState extends Phaser.State {
 	}
 	
 	finishGame(scores) {
+		for (let player of this.playerObjects) {
+			player.unregisterCallbacks();
+		}
 		this.game.state.states.EndState.setScore(scores);
 		this.game.state.start("EndState");
 	}

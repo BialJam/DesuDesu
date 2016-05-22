@@ -46,6 +46,11 @@ class Player extends Phaser.Group {
         this.moveActions = { 'up': this.moveUp, 'down': this.moveDown, 'left': this.moveLeft, 'right': this.moveRight };
         this.divideActions = { 'up': this.divideUp, 'down': this.divideDown, 'left': this.divideLeft, 'right': this.divideRight };
     }
+    
+    unregisterCallbacks() {
+        this.pad.onUpCallback = null;
+        this.pad.onDownCallback = null;
+    }
 
     handlePadDown(btnId) {
         let btnName = this.info.padMap[btnId];

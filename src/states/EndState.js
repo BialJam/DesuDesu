@@ -35,7 +35,7 @@ class EndState extends Phaser.State {
             playerScoreText.tint = '0x' + player.info.colorStr.replace('#', '');
             winnerIdx++;
         }
-        this.game.add.bitmapText(center.x - 350, center.y + 200, 'font', 'Player 1 hit match button to replay!', 36);
+        this.game.add.bitmapText(center.x - 350, center.y + 200, 'font', 'Player 1 hit action button to replay!', 36);
 
     }
 
@@ -45,7 +45,7 @@ class EndState extends Phaser.State {
 
     padDownEvent(button) {
         let firstPad = this.game.players[0].padId;
-        let firstPadMap = this.game.players[0].info.padMap;
+        let firstPadMap = this.game.players[0].padMap;
         let pad = this.game.input.gamepad[firstPad];
         pad.addCallbacks(this, {
             onDown: x => {
