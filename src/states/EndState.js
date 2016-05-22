@@ -58,8 +58,6 @@ class EndState extends Phaser.State {
                 }
             }
         });
-
-        console.log("new player");
     }
 }
 
