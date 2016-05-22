@@ -6,56 +6,37 @@ class ScoreTable extends Phaser.Sprite {
         super(game);
         this.sprite = new Phaser.Sprite(game, PosX, PosY, key);
         game.add.existing(this);
-        
-        let p1Score = this.game.add.bitmapText(262 - 24 - 64 - 32, 12, 'font', '0', 24);
-        this.addChildAt(p1Score, 0);
-        let p2Score = this.game.add.bitmapText(390 - 24 - 64, 12, 'font', '0', 24);
-        this.addChildAt(p2Score, 1);
-        let p3Score = this.game.add.bitmapText(518 - 24 + 64, 12, 'font', '0', 24);
-        this.addChildAt(p3Score, 2);
-        let p4Score = this.game.add.bitmapText(646 - 24 + 64 + 32, 12, 'font', '0', 24);
-        this.addChildAt(p4Score, 3);
-        
-        
-        let p1Pad = new Phaser.Sprite(game, 262 + 24 - 64 - 32, 6, 'pad');
-        p1Pad.tint = Colors[0].colorNum;
-        this.addChild(p1Pad, 4);
-        let p2Pad = new Phaser.Sprite(game, 390 + 24 - 64, 6, 'pad');
-        p2Pad.tint = Colors[1].colorNum;
-        this.addChild(p2Pad, 5);
-        let p3Pad = new Phaser.Sprite(game, 518 + 24 + 64, 6, 'pad');
-        p3Pad.tint = Colors[2].colorNum;
-        this.addChild(p3Pad, 6);
-        let p4Pad = new Phaser.Sprite(game, 646 + 24 + 64 + 32, 6, 'pad');
-        p4Pad.tint = Colors[3].colorNum;
-        this.addChild(p4Pad, 7);
+
+        let scores = [];
+        scores[0] = this.game.add.bitmapText(262 - 24 - 64 - 32, 12, 'font', '0', 24);
+        scores[1] = this.game.add.bitmapText(390 - 24 - 64, 12, 'font', '0', 24);
+        scores[2] = this.game.add.bitmapText(518 - 24 + 64, 12, 'font', '0', 24);
+        scores[3] = this.game.add.bitmapText(646 - 24 + 64 + 32, 12, 'font', '0', 24);
+
+        for (let score of scores) {
+            this.addChild(score);
+        }
+
+        let pads = [];
+        pads.push(new Phaser.Sprite(game, 262 + 24 - 64 - 32, 6, 'pad'));
+        pads.push(new Phaser.Sprite(game, 390 + 24 - 64, 6, 'pad'));
+        pads.push(new Phaser.Sprite(game, 518 + 24 + 64, 6, 'pad'));
+        pads.push(new Phaser.Sprite(game, 646 + 24 + 64 + 32, 6, 'pad'));
+
+        let idx = 0;
+        for (let pad of pads) {
+            this.addChild(pad);
+            pad.tint = Colors[idx].colorNum;
+            idx++;
+        }
     }
 
     changeScore(player, score) {
-        if (player === 0) {
-            let p1Score = this.getChildAt(0);
-            p1Score.text = score;
-            this.removeChildAt(0);
-            this.addChildAt(p1Score, 0);
-        }
-        if (player === 1) {
-            let p2Score = this.getChildAt(1);
-            p2Score.text = score;
-            this.removeChildAt(1);
-            this.addChildAt(p2Score, 1);
-        }
-        if (player === 2) {
-            let p3Score = this.getChildAt(2);
-            p3Score.text = score;
-            this.removeChildAt(2);
-            this.addChildAt(p3Score, 2);
-        }
-        if (player === 3) {
-            let p4Score = this.getChildAt(3);
-            p4Score.text = score;
-            this.removeChildAt(3);
-            this.addChildAt(p4Score, 3);
-        }
+        let id = player.info.id;
+        let p1Score = this.getChildAt(id);
+        p1Score.text = score;
+        this.removeChildAt(id);
+        this.addChildAt(p1Score, id);
     }
 }
 
