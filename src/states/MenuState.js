@@ -15,7 +15,45 @@ class MenuState extends Phaser.State {
         this.game.input.gamepad.addCallbacks(this, {
             onDown: this.padDownEvent
         });
-        this.playerz = {};
+        this.clearSettings();
+    }
+
+    update() {
+    }
+
+    playerInfoArray() {
+        let players = [];
+        for (let i = 0; i < this.playerz.length; ++i) {
+            if (this.isActive[i])
+                players.push(this.playerz[i]);
+        }
+        return players;
+    }
+
+    saveSettings() {
+        if (typeof (Storage) === "undefined")
+            return;
+        localStorage.setItem("players", JSON.stringify(this.playerInfoArray()));
+        console.log("Saved players:");
+        console.log(this.playerInfoArray());
+    }
+
+    loadSettings() {
+        if (typeof (Storage) === "undefined")
+            return;
+        let players = JSON.parse(localStorage.getItem("players"));
+        for (let i = 0; i < players.length; ++i) {
+            players[i].id = i;
+            this.playerButtonId[id] = this.buttons.length;
+            this.playerNums++;
+            this.playerz[id] = players[i];
+        }
+        console.log("Loaded players:");
+        console.log(this.playerInfoArray());
+    }
+
+    clearSettings() {
+        this.playerz = [];
         this.playerNums = 0;
         this.playerText = {};
         this.playerButtonId = {};
@@ -28,70 +66,74 @@ class MenuState extends Phaser.State {
             this.playerButtons[i] = this.add.sprite(32, 250 + (i * 70), 'colorButtons', 2);
             this.playerButtons[i].tint = color;
         }
+        this.clearCallbacks();
     }
 
-    update() {
+    clearCallbacks() {
+        for (let i = 0; i < this.playerz.length; ++i) {
+            let pPad = this.game.input.gamepad[this.playerz[i].padId];
+            if (pPad)
+                pPad.onDownCallback = null;
+        }
     }
 
     addPlayer(id) {
         console.log("pad connected ", id);
     }
 
-    padDownEvent(button, mysteryParameter, id) {
-        if (!(id in this.playerz)) {
-            console.log("new player");
-            let padId = 'pad' + (id + 1);
-            let pad = this.game.input.gamepad[padId];
-            let padMap = {};
-            let pId = this.playerNums;
-            this.playerz[id] = new PlayerInfo(padId, pId, padMap);
-            this.playerButtonId[id] = 0;
-            this.playerNums++;
-            pad.addCallbacks(this, {
-                onDown: x => {
-                    if (this.playerButtonId[id] < this.buttons.length) {
-                        let a = this.buttons[this.playerButtonId[id]];
-                        //
-                       if (a !== 'any') {
-                           if (padMap[x])
-                                return;
-                           padMap[x] = a;
-                       }
-                        this.playerButtonId[id]++;
-                        if (this.playerButtonId[id] >= this.buttons.length) {
-                            this.playerText[pId].text = "ready?";
-                        }
-                        else {
-                            this.playerText[pId].text = this.buttons[this.playerButtonId[id]];
-                        }
+    registerButtonCallback(playerInfo, pId) {
+        let pad = this.game.input.gamepad[playerInfo.padId];
+        pad.addCallbacks(this, {
+            onDown: x => {
+                if (this.playerButtonId[pId] < this.buttons.length) {
+                    let a = this.buttons[this.playerButtonId[pId]];
+                    //
+                    if (a !== 'any') {
+                        if (playerInfo.padMap[x])
+                            return;
+                        playerInfo.padMap[x] = a;
                     }
-                    else if ('action' === padMap[x]) {
-                        if (pId == 0 && this.isActive[0]) {
-                            for (let k in this.playerz) {
-                                let pPad = this.game.input.gamepad[this.playerz[k].padId];
-                                pPad.onDownCallback = null;
-                                if (this.isActive[pId])
-                                    this.game.players.push(this.playerz[k]);
-                            }
-                            this.game.state.start('GameState');
-                        }
-                        else {
-                            this.playerText[pId].text = (pId == 0 ? "press 'action' to begin" : "ready!");
-                            this.isActive[pId] = true;
-                            this.playerButtons[pId].frame = 1;
-                        }
+                    this.playerButtonId[pId]++;
+                    if (this.playerButtonId[pId] >= this.buttons.length) {
+                        this.playerText[pId].text = "ready?";
                     }
-                    console.log(padMap);
+                    else {
+                        this.playerText[pId].text = this.buttons[this.playerButtonId[pId]];
+                    }
                 }
-            });
-            
-        }
+                else if ('action' === playerInfo.padMap[x]) {
+                    if (pId == 0 && this.isActive[0]) {
+                        this.clearCallbacks();
+                        this.game.players = this.playerInfoArray();
+                        this.game.state.start('GameState');
+                    }
+                    else {
+                        this.playerText[pId].text = (pId == 0 ? "press 'action' to begin" : "ready!");
+                        this.isActive[pId] = true;
+                        this.playerButtons[pId].frame = 1;
+                        this.saveSettings();
+                    }
+                }
+                console.log(playerInfo.padMap);
+            }
+        });
     }
-}
 
-function startOnClick() {
-    //console.log('DUPA1');
-    this.game.state.start('GameState');
+    padDownEvent(button, mysteryParameter, id) {
+        let padId = 'pad' + (id + 1);
+        for (let i = 0; i < this.playerz.length; ++i) {
+            if (this.playerz[i].padId == padId)
+                return;
+        }
+
+        console.log("new player");
+
+        let pId = this.playerNums;
+        this.playerz[pId] = new PlayerInfo(padId, pId, {});
+        this.playerButtonId[pId] = 0;
+        this.playerNums++;
+        this.registerButtonCallback(this.playerz[pId], pId);
+    }
 }
 
 export default MenuState;

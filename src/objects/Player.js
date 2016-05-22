@@ -2,10 +2,10 @@
 import MapConsts from 'consts/MapConsts.js';
 
 export class PlayerInfo {
-    constructor(padId, id, padMapping) {
+    constructor(padId, id, padMap) {
         this.padId = padId;
         this.id = id;
-        this.padMapping = padMapping; // map pad key => button type string
+        this.padMap = padMap; // map pad key => button type string
     }
     get color() {
         return this.colorNum;
@@ -31,7 +31,7 @@ class Player extends Phaser.Group {
         this.sprite.animations.play('cycle', 8, true);
         this.addChild(this.sprite);
         
-        // this.info.pad.addCallback(this, {
+        // this.pad.addCallback(this, {
         //     onDown : x => this.keys['action'] = true;
         // })
     }
@@ -67,7 +67,7 @@ class Player extends Phaser.Group {
     update() {
     }
     
-    getPad() {
+    get pad() {
         return this.game.input.gamepad[this.info.padId];
     }
 }
