@@ -1,8 +1,8 @@
 const MapConsts = {
     Size : 32,
     StartHealth: 64,
-    SizeX : 29,
-    SizeY : 18,
+    SizeX : 14,
+    SizeY : 9,
     StartingPositions : [
         {
             x : 2,
@@ -11,20 +11,20 @@ const MapConsts = {
             colorNum : 0x12fe00
         },
         {
-            x : 27,
-            y : 17,
+            x : 12,
+            y : 8,
             colorStr : '#fff859',//rzulty
             colorNum : 0xfff859
         },
         {
-            x : 27,
+            x : 12,
             y : 2,
             colorStr : '#0decfe',//niebieski
             colorNum : 0x0decfe
         },
         {
             x : 2,
-            y : 17,
+            y : 12,
             colorStr : '#fe544f',//czerfony
             colorNum : 0xfe544f
         }

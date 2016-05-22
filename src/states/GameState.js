@@ -28,8 +28,9 @@ class GameState extends Phaser.State {
 	}
 
 	createMap() {
-		this.mapa = new GameMap(this.game, 29, 18);
-		this.mapa.x += 16;
+		this.mapa = new GameMap(this.game, MapConsts.SizeX, MapConsts.SizeY);
+		this.mapa.scale.set(2,2);
+		this.mapa.x += 32;
 		this.mapa.y += 54;
 	}
 
