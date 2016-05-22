@@ -104,7 +104,7 @@ class GameState extends Phaser.State {
 			let healthToTake = Math.min(targetTile.health, healthToMove);
 			srcTile.depopulate(healthToMove);
 			targetTile.depopulate(healthToTake);
-			let healthToPopulate = healthToMove - healthToTake;
+			let healthToPopulate = healthToMove - Math.ceil(healthToTake / 2);
 			if (healthToPopulate > 0) {
 				targetTile.populate(player, healthToPopulate);
 			}
