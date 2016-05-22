@@ -27,8 +27,13 @@ class GameState extends Phaser.State {
 	createMap() {
 		this.mapa = new GameMap(this.game, MapConsts.SizeX, MapConsts.SizeY);
 		this.mapa.scale.set(2,2);
-		this.mapa.x += 32;
-		this.mapa.y += 54;
+		
+		let marginL = (this.game.width - (MapConsts.SizeX * MapConsts.Size * 2)) /2;
+		
+		this.mapa.x = Math.floor(marginL);
+		
+		let marginT = ((this.game.height - 50) - (MapConsts.SizeY * MapConsts.Size * 2)) /2;
+		this.mapa.y = 50 + Math.floor(marginT);
 	}
 
 	addPlayerByInfo(playerInfo) {
