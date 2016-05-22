@@ -1,5 +1,7 @@
 /// <reference path="../../node_modules/phaser/typescript/phaser.d.ts" />
 
+var _ = require("underscore");
+
 class EndState extends Phaser.State {
     setScore(playerToScoreMap) {
         this.score = playerToScoreMap;
@@ -10,9 +12,9 @@ class EndState extends Phaser.State {
             // DEBUG MODE
             this.score = new Map();
             this.score.set({ info: { id: 0, colorStr: '#12fe00' } }, 200);
-            this.score.set({ info: { id: 1, colorStr: '#fff859' } }, 200);
-            this.score.set({ info: { id: 2, colorStr: '#0decfe' } }, 200);
-            this.score.set({ info: { id: 3, colorStr: '#fe544f' } }, 200);
+            this.score.set({ info: { id: 1, colorStr: '#fff859' } }, 175);
+            this.score.set({ info: { id: 2, colorStr: '#0decfe' } }, 80);
+            this.score.set({ info: { id: 3, colorStr: '#fe544f' } }, 300);
         }
         console.log("EndState:");
         this.game.add.sprite(0, 0, 'bgEnd');
@@ -29,8 +31,11 @@ class EndState extends Phaser.State {
         });
 
         let winnerIdx = 1;
-        this.game.add.bitmapText(center.x - 135, center.y - 245, 'font', 'WINNERS:', 60);
-        for (let [player, score] of winners) {
+        let sortedPlayers = _.sortBy(Array.from(this.score.entries()), function(e){
+            return -e[1];
+        });
+        this.game.add.bitmapText(center.x - 125, center.y - 245, 'font', 'SCORES:', 60);
+        for (let [player, score] of sortedPlayers) {
             let playerScoreText = this.game.add.bitmapText(center.x - 350, center.y - 195 + winnerIdx * 70, 'font', 'Player ' + (player.info.id + 1) + ' score: ' + score, 48);
             playerScoreText.tint = '0x' + player.info.colorStr.replace('#', '');
             winnerIdx++;
