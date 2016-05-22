@@ -19,8 +19,10 @@ export class PlayerInfo {
 }
 
 class Player extends Phaser.Group {
-    constructor (game, info, tilePosX, tilePosY) {
+    constructor (game, info, tilePosX, tilePosY, callbacks) {
         super(game);
+        this.callbacks = callbacks || {};
+        this.callbacks.doDivide = function(player, targetTile) {};
         this.info = info;
         this.tilePosX = tilePosX;
         this.tilePosY = tilePosY;
@@ -31,28 +33,53 @@ class Player extends Phaser.Group {
         this.sprite.animations.play('cycle', 8, true);
         this.addChild(this.sprite);
         
-        // this.pad.addCallback(this, {
-        //     onDown : x => this.keys['action'] = true;
-        // })
+        this.pad.addCallbacks(this, {
+             onDown : this.handlePadDown,
+             onUp : this.handlePadUp
+         });
+         
+         this.actionPressed = false;
+         
+         this.moveActions = {'up': this.moveUp, 'down': this.moveDown, 'left': this.moveLeft, 'right': this.moveRight};
+         
+    }
+    
+    handlePadDown(btnId) {
+        let btnName = this.info.padMap[btnId];
+        console.log("button pressed");
+        console.log(btnName);
+        if (btnName == 'action')
+            this.actionPressed = true;
+            
+        if (!this.actionPressed && this.moveActions[btnName])
+            this.moveActions[btnName].call(this);
+        
+    }
+    
+    handlePadUp(btnId) {
+        let btnName = this.info.padMap[btnId];
+        if (btnName == 'action')
+            this.actionPressed = false;
     }
     
     moveUp() {
-        this.tilePosY -= 1;
+        console.log("moved up");
+        this.tilePosY = (MapConsts.SizeY + this.tilePosY - 1) % MapConsts.SizeY;
         this.updateSprites();
     }
     
     moveDown() {
-        this.tilePosY += 1;
+        this.tilePosY = (this.tilePosY + 1) % MapConsts.SizeY;
         this.updateSprites();
     }
     
     moveLeft() {
-        this.tilePosX -= 1;
+        this.tilePosX = (MapConsts.SizeX + this.tilePosX - 1) % MapConsts.SizeX;
         this.updateSprites();
     }
     
     moveRight() {
-        this.tilePosX += 1;
+        this.tilePosX = (this.tilePosX + 1) % MapConsts.SizeX;
         this.updateSprites();
     }
     
