@@ -8,9 +8,10 @@ class MenuState extends Phaser.State {
         // this.game.add.tileSprite(0, 0, 960, 640, 'background-menu');
         this.game.add.image(0, 0, 'bg');
         let center = { x: this.game.world.centerX, y: this.game.world.centerY };
-        let resetBtn = this.game.add.button(center.x - 32, center.y + 225, 'colorButtons', this.clearSettings, this, 2, 2, 1, 2);
+        let resetBtn = this.game.add.button(center.x - 32, center.y + 225, 'colorButtons', () => {this.clearSettings(); this.saveSettings();}, this, 2, 2, 1, 2);
         this.playersColors = ['0x12fe00', '0xfff859', '0x0decfe', '0xfe544f'];
         this.buttons = ['any', 'up', 'down', 'left', 'right', 'action'];
+        this.playerText = {};
         this.isActive = [false, false, false, false];
         this.game.input.gamepad.start();
         this.game.input.gamepad.addCallbacks(this, {
@@ -31,7 +32,7 @@ class MenuState extends Phaser.State {
         }
         return players;
     }
-    
+
     playerSettingsArray() {
         let players = [];
         for (let i = 0; i < this.playerz.length; ++i) {
@@ -69,14 +70,18 @@ class MenuState extends Phaser.State {
     clearSettings() {
         this.playerz = [];
         this.playerNums = 0;
-        this.playerText = {};
         this.playerButtonId = {};
         this.playerButtons = [];
 
         for (let i = 0; i < 4; ++i) {
             let color = this.playersColors[i];
-            this.playerText[i] = this.game.add.bitmapText(128, 250 + 16 + (i * 70), 'font', 'player' + (i + 1) + ' - press any button to join', 32);
-            this.playerText[i].tint = color;
+            if (this.playerText[i] === undefined) {
+                this.playerText[i] = this.game.add.bitmapText(128, 250 + 16 + (i * 70), 'font', 'player' + (i + 1) + ' - press any button to join', 32);
+                this.playerText[i].tint = color;
+            }
+            else {
+                this.playerText[i].text = 'player' + (i + 1) + ' - press any button to join';
+            }
             this.playerButtons[i] = this.add.sprite(32, 250 + (i * 70), 'colorButtons', 2);
             this.playerButtons[i].tint = color;
         }
@@ -134,7 +139,6 @@ class MenuState extends Phaser.State {
     }
 
     padDownEvent(button, mysteryParameter, id) {
-        console.log("pad event");
         let padId = 'pad' + (id + 1);
         for (let i = 0; i < this.playerz.length; ++i) {
             if (this.playerz[i].padId == padId)

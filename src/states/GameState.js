@@ -36,7 +36,7 @@ class GameState extends Phaser.State {
 	addPlayerByInfo(playerInfo) {
 		let id = playerInfo.id;
 		let pos = MapConsts.StartingPositions[id];
-		let player = new Player(this.game, playerInfo, pos.x, pos.y);
+		let player = new Player(this.game, playerInfo, pos.x, pos.y, {doDivide: (player, targetTileX, targetTileY) => {this.divideInto(player, targetTileX, targetTileY)}});
 		let startTile = this.playerTile(player);
 		this.mapa.addChild(player);
 		startTile.populate(player, MapConsts.StartHealth);
