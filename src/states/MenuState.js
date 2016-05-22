@@ -17,6 +17,7 @@ class MenuState extends Phaser.State {
             onDown: this.padDownEvent
         });
         this.clearSettings();
+        this.loadSettings();
     }
 
     update() {
@@ -30,27 +31,38 @@ class MenuState extends Phaser.State {
         }
         return players;
     }
+    
+    playerSettingsArray() {
+        let players = [];
+        for (let i = 0; i < this.playerz.length; ++i) {
+            if (this.playerButtonId[i] == this.buttons.length)
+                players.push(this.playerz[i]);
+        }
+        return players;
+    }
 
     saveSettings() {
         if (typeof (Storage) === "undefined")
             return;
-        localStorage.setItem("players", JSON.stringify(this.playerInfoArray()));
+        localStorage.setItem("players", JSON.stringify(this.playerSettingsArray()));
         console.log("Saved players:");
-        console.log(this.playerInfoArray());
+        console.log(this.playerSettingsArray());
     }
 
     loadSettings() {
         if (typeof (Storage) === "undefined")
             return;
+        this.playerz.length = 0;
         let players = JSON.parse(localStorage.getItem("players"));
         for (let i = 0; i < players.length; ++i) {
             players[i].id = i;
-            this.playerButtonId[id] = this.buttons.length;
+            this.playerButtonId[i] = this.buttons.length;
             this.playerNums++;
-            this.playerz[id] = players[i];
+            this.playerz[i] = new PlayerInfo(players[i].padId, players[i].id, players[i].padMap);
+            this.registerButtonCallback(players[i], i);
         }
-        console.log("Loaded players:");
-        console.log(this.playerInfoArray());
+        console.log("Loaded players.");
+        console.log(this.playerSettingsArray());
     }
 
     clearSettings() {
@@ -102,13 +114,13 @@ class MenuState extends Phaser.State {
                         this.playerText[pId].text = this.buttons[this.playerButtonId[pId]];
                     }
                 }
-                else if ('action' === playerInfo.padMap[x]) {
+                else {
                     if (pId == 0 && this.isActive[0]) {
                         this.clearCallbacks();
                         this.game.players = this.playerInfoArray();
                         this.game.state.start('GameState');
                     }
-                    else {
+                    else if (!this.isActive[pId]) {
                         this.playerText[pId].text = (pId == 0 ? "press 'action' to begin" : "ready!");
                         this.isActive[pId] = true;
                         this.playerButtons[pId].frame = 1;
@@ -121,6 +133,7 @@ class MenuState extends Phaser.State {
     }
 
     padDownEvent(button, mysteryParameter, id) {
+        console.log("pad event");
         let padId = 'pad' + (id + 1);
         for (let i = 0; i < this.playerz.length; ++i) {
             if (this.playerz[i].padId == padId)

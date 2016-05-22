@@ -22,7 +22,9 @@ class LoadingScreen extends Phaser.State {
         
         this.load.bitmapFont('font', 'assets/04B_03___0.png', 'assets/04B_03__.xml');
         
-        this.game.load.audio('themeAudio', 'assets/audio/themeAudio.mp3');        
+        this.game.load.audio('themeAudio', 'assets/audio/themeAudio.mp3'); 
+        this.game.load.audio('attackSound', 'assets/audio/attackSound.wav');    
+        this.game.load.audio('divideSound', 'assets/audio/divideSound.wav');          
         
         this.game.load.spritesheet('colorButtons', 'assets/colorButtonSpritesheet.png', 64, 64); 
         this.game.load.spritesheet('startGameSpritesheet', 'assets/startGameSpritesheet.png', 248, 64); 
