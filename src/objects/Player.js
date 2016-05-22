@@ -6,7 +6,7 @@ export class PlayerInfo {
         this.pad = pad;
         this.color = color;
         this.id = id;
-        this.padMapping = padMapping;
+        this.padMapping = padMapping; // map pad key => button type string
     }
     get colorNum () {
         return MapConsts.StartingPositions[this.id].colorNum;

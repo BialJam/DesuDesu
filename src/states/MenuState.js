@@ -51,7 +51,12 @@ class MenuState extends Phaser.State {
                 onDown: x => {
                     if (this.playerButtonId[id] < this.buttons.length) {
                         let a = this.buttons[this.playerButtonId[id]];
-                        padMap[a] = x;
+                        //
+                       if (a !== 'any') {
+                           if (padMap[x])
+                                return;
+                           padMap[x] = a;
+                       }
                         this.playerButtonId[id]++;
                         if (this.playerButtonId[id] >= this.buttons.length) {
                             this.playerText[pId].text = "ready?";
@@ -60,11 +65,12 @@ class MenuState extends Phaser.State {
                             this.playerText[pId].text = this.buttons[this.playerButtonId[id]];
                         }
                     }
-                    else if (x === padMap['action']) {
+                    else if ('action' === padMap[x]) {
                         if (pId == 0 && this.isActive[0]) {
                             for (let k in this.playerz) {
                                 this.playerz[k].pad.onDownCallback = null;
-                                this.game.players.push(this.playerz[k]);
+                                if (this.isActive[pId])
+                                    this.game.players.push(this.playerz[k]);
                             }
                             this.game.state.start('GameState');
                         }
@@ -74,8 +80,10 @@ class MenuState extends Phaser.State {
                             this.playerButtons[pId].frame = 1;
                         }
                     }
+                    console.log(padMap);
                 }
             });
+            
         }
     }
 }
