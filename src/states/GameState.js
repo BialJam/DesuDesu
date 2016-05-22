@@ -78,6 +78,8 @@ class GameState extends Phaser.State {
 	divideInto(player, targetTileX, targetTileY) {
 		console.log("divide start");
 		let srcTile = this.playerTile(player);
+		if (srcTile.player !== player)
+			return;
 		let targetTile = this.tileAt(targetTileX, targetTileY);
 		if (!targetTile.isHabitable())
 			return;
