@@ -23,6 +23,15 @@ class GameMap extends Phaser.Group {
     tileAt(targetTileX, targetTileY) {
         return this.mapData[targetTileY * this.xSize + targetTileX];
     }
+    
+    increaseScores() {
+        for (let i = 0; i < this.mapData.length; ++i) {
+            let tile = this.mapData[i];
+            if (!tile.isFree()) {
+                tile.grow(1);
+            }
+        }
+    }
 
     scores() {
         let playerToScore = new Map();

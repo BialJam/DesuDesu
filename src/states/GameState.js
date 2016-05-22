@@ -57,6 +57,8 @@ class GameState extends Phaser.State {
 		if (this.countdown == 0 || Array.from(score.entries()).length == 1) {
 			this.finishGame(score);
 		}
+		if (this.countdown && this.countdown % 5 == 0)
+			this.mapa.increaseScores();
 	}
 	
 	finishGame(scores) {
