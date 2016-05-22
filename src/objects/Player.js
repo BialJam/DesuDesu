@@ -67,23 +67,48 @@ class Player extends Phaser.Group {
     }
 
     moveUp() {
-        this.tilePosY = (MapConsts.SizeY + this.tilePosY - 1) % MapConsts.SizeY;
-        this.updateSprites();
+        console.log("UP!");
+        let tween = this.game.add
+            .tween(this)
+            .to({
+                y: ((MapConsts.SizeY + this.tilePosY - 1) % MapConsts.SizeY) * MapConsts.Size
+            }, 66, 'Linear', true, 0);
+        tween.onComplete.add(() => {
+            this.tilePosY = (MapConsts.SizeY + this.tilePosY - 1) % MapConsts.SizeY;
+        }, this);
     }
 
     moveDown() {
-        this.tilePosY = (this.tilePosY + 1) % MapConsts.SizeY;
-        this.updateSprites();
+        let tween = this.game.add
+            .tween(this)
+            .to({
+                y: ((MapConsts.SizeY + this.tilePosY + 1) % MapConsts.SizeY) * MapConsts.Size
+            }, 66, 'Linear', true, 0);
+        tween.onComplete.add(() => {
+            this.tilePosY = (MapConsts.SizeY + this.tilePosY + 1) % MapConsts.SizeY;
+        }, this);
     }
 
     moveLeft() {
-        this.tilePosX = (MapConsts.SizeX + this.tilePosX - 1) % MapConsts.SizeX;
-        this.updateSprites();
+        let tween = this.game.add
+            .tween(this)
+            .to({
+                x: ((MapConsts.SizeX + this.tilePosX - 1) % MapConsts.SizeX) * MapConsts.Size
+            }, 66, 'Linear', true, 0);
+        tween.onComplete.add(() => {
+            this.tilePosX = (MapConsts.SizeX + this.tilePosX - 1) % MapConsts.SizeX;
+        }, this);
     }
 
     moveRight() {
-        this.tilePosX = (this.tilePosX + 1) % MapConsts.SizeX;
-        this.updateSprites();
+        let tween = this.game.add
+            .tween(this)
+            .to({
+                x: ((MapConsts.SizeX + this.tilePosX + 1) % MapConsts.SizeX) * MapConsts.Size
+            }, 66, 'Linear', true, 0);
+        tween.onComplete.add(() => {
+            this.tilePosX = (MapConsts.SizeX + this.tilePosX + 1) % MapConsts.SizeX;
+        }, this);
     }
 
     divideTo(tilePosX, tilePosY) {
