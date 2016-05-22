@@ -1,5 +1,5 @@
 /// <reference path="../../node_modules/phaser/typescript/phaser.d.ts" />
-import MapConsts from 'consts/MapConsts.js';
+import MapConsts,{Colors} from 'consts/MapConsts.js';
 
 export class PlayerInfo {
     constructor(padId, id, padMap) {
@@ -11,10 +11,10 @@ export class PlayerInfo {
         return this.colorNum;
     }
     get colorNum() {
-        return MapConsts.StartingPositions[this.id].colorNum;
+        return Colors[this.id].colorNum;
     }
     get colorStr() {
-        return MapConsts.StartingPositions[this.id].colorStr;
+        return Colors[this.id].colorStr;
     }
 }
 

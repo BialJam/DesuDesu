@@ -1,6 +1,6 @@
 /// <reference path="../../node_modules/phaser/typescript/phaser.d.ts" />
 import Grid from 'objects/Grid';
-import MapConsts from 'consts/MapConsts';
+import MapConsts, {configForPlayers} from 'consts/MapConsts';
 import GameMap from 'objects/GameMap';
 import ScoreTable from 'objects/ScoreTable';
 import Player, {PlayerInfo} from 'objects/Player';
@@ -9,6 +9,7 @@ import Timer from 'objects/Timer';
 
 class GameState extends Phaser.State {
     create() {
+		configForPlayers(this.game.players.length);
 		this.game.add.image(0, 0, 'bgFrame');
 		this.playerObjects = [];
 		this.countdown = 99;

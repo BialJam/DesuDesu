@@ -1,5 +1,5 @@
 /// <reference path="../../node_modules/phaser/typescript/phaser.d.ts" />
-import MapConsts from 'consts/MapConsts';
+import MapConsts, {Colors} from 'consts/MapConsts';
 
 class ScoreTable extends Phaser.Sprite {
     constructor(game, PosX, PosY, key) {
@@ -18,16 +18,16 @@ class ScoreTable extends Phaser.Sprite {
         
         
         let p1Pad = new Phaser.Sprite(game, 262 + 24 - 64 - 32, 6, 'pad');
-        p1Pad.tint = MapConsts.StartingPositions[0].colorNum;
+        p1Pad.tint = Colors[0].colorNum;
         this.addChild(p1Pad, 4);
         let p2Pad = new Phaser.Sprite(game, 390 + 24 - 64, 6, 'pad');
-        p2Pad.tint = MapConsts.StartingPositions[1].colorNum;
+        p2Pad.tint = Colors[1].colorNum;
         this.addChild(p2Pad, 5);
         let p3Pad = new Phaser.Sprite(game, 518 + 24 + 64, 6, 'pad');
-        p3Pad.tint = MapConsts.StartingPositions[2].colorNum;
+        p3Pad.tint = Colors[2].colorNum;
         this.addChild(p3Pad, 6);
         let p4Pad = new Phaser.Sprite(game, 646 + 24 + 64 + 32, 6, 'pad');
-        p4Pad.tint = MapConsts.StartingPositions[3].colorNum;
+        p4Pad.tint = Colors[3].colorNum;
         this.addChild(p4Pad, 7);
     }
 
