@@ -8,7 +8,7 @@ class MenuState extends Phaser.State {
         // this.game.add.tileSprite(0, 0, 960, 640, 'background-menu');
         this.game.add.image(0, 0, 'bg');
         let center = { x: this.game.world.centerX, y: this.game.world.centerY };
-        let resetBtn = this.game.add.button(center.x - 32, center.y + 225, 'colorButtons', this.clearSettings, this, 2, 2, 1, 2);
+        let resetBtn = this.game.add.button(center.x - 32, center.y + 225, 'colorButtons', () => {this.clearSettings(); this.saveSettings();}, this, 2, 2, 1, 2);
         this.playersColors = ['0x12fe00', '0xfff859', '0x0decfe', '0xfe544f'];
         this.buttons = ['any', 'up', 'down', 'left', 'right', 'action'];
         this.isActive = [false, false, false, false];
@@ -133,7 +133,6 @@ class MenuState extends Phaser.State {
     }
 
     padDownEvent(button, mysteryParameter, id) {
-        console.log("pad event");
         let padId = 'pad' + (id + 1);
         for (let i = 0; i < this.playerz.length; ++i) {
             if (this.playerz[i].padId == padId)
