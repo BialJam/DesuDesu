@@ -5,13 +5,13 @@ class Timer extends Phaser.Sprite {
         super(game);
         this.sprite = new Phaser.Sprite(game, PosX, PosY, key);
         game.add.existing(this);
-        let timerText = new Phaser.Text(this.game, 0, 0, '99', { font: "24px Arial", fill: "#ffffff" });
+        let timerText = new Phaser.Text(this.game, 480 - 18, 7, '99', { font: "32px Arial", fill: "#ffffff" });
         this.addChild(timerText);
     }
 
     changeTimer(timer) {
         this.removeChildren();
-        let timerText = new Phaser.Text(this.game, 0, 0, timer, { font: "24px Arial", fill: "#ffffff" });
+        let timerText = new Phaser.Text(this.game, 480 - 18, 7, timer, { font: "32px Arial", fill: "#ffffff" });
         this.addChild(timerText);
     }
 }

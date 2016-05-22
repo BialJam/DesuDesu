@@ -19,10 +19,10 @@ class GameState extends Phaser.State {
 		this.timerLabel = new Timer(this.game, 200, 200, 'timer');
 		this.timerStart();
 		this.scoreTable = new ScoreTable(this.game, 300, 300, 'scoreTable');
-		this.scoreTable.changeScore(0, 20);
-		this.scoreTable.changeScore(1, 0);
-		this.scoreTable.changeScore(2, 55);
-		this.scoreTable.changeScore(3, 99);
+		this.scoreTable.changeScore(0, 100);
+		this.scoreTable.changeScore(1, 101);
+		this.scoreTable.changeScore(2, 102);
+		this.scoreTable.changeScore(3, 103);
 		this.attackSound = this.game.add.audio('attackSound');
         this.divideSound = this.game.add.audio('divideSound');
 	}
@@ -36,7 +36,7 @@ class GameState extends Phaser.State {
 	addPlayerByInfo(playerInfo) {
 		let id = playerInfo.id;
 		let pos = MapConsts.StartingPositions[id];
-		let player = new Player(this.game, playerInfo, pos.x, pos.y);
+		let player = new Player(this.game, playerInfo, pos.x, pos.y, {doDivide: (player, targetTileX, targetTileY) => {this.divideInto(player, targetTileX, targetTileY)}});
 		let startTile = this.playerTile(player);
 		this.mapa.addChild(player);
 		startTile.populate(player, MapConsts.StartHealth);
