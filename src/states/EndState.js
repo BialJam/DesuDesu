@@ -36,13 +36,7 @@ class EndState extends Phaser.State {
             winnerIdx++;
         }
         this.game.add.bitmapText(center.x - 350, center.y + 200, 'font', 'Player 1 hit match button to replay!', 36);
-        let players = Array.from(this.score.keys());
-        for (let i = 0; i < players.length; i++) {
-            if (players[i].info.id === 0) {
-                this.firstPad = players[i].info.padId;
-                this.firstPadMap = players[i].info.padMap;
-            }
-        }
+
     }
 
     rematch() {
@@ -50,10 +44,12 @@ class EndState extends Phaser.State {
     }
 
     padDownEvent(button) {
-        let pad = this.game.input.gamepad[this.firstPad];
+        let firstPad = this.game.players[0].padId;
+        let firstPadMap = this.game.players[0].info.padMap;
+        let pad = this.game.input.gamepad[firstPad];
         pad.addCallbacks(this, {
             onDown: x => {
-                if(this.firstPadMap[x] === 'action') {
+                if(firstPadMap[x] === 'action') {
                     this.rematch();
                 }
             }

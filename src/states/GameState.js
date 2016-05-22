@@ -50,16 +50,15 @@ class GameState extends Phaser.State {
 		this.countdown--;
         console.log("Timer: " + this.countdown);
 		this.timerLabel.changeTimer(this.countdown);
-		let score = this.mapa.scores();
-		let playersScore = Array.from(score.values());
-		for(let i = 0; i < playersScore.length; i++) {
-			this.scoreTable.changeScore(i, playersScore[i]);
+		if (this.countdown && this.countdown % 5 == 0)
+			this.mapa.increaseScores();
+		let score = this.mapa.scores(this.playerObjects);
+		for(let [player, score] of score.entries()) {
+			this.scoreTable.changeScore(player, score);
 		}
 		if (this.countdown == 0 || Array.from(score.entries()).length == 1) {
 			this.finishGame(score);
 		}
-		if (this.countdown && this.countdown % 5 == 0)
-			this.mapa.increaseScores();
 	}
 	
 	finishGame(scores) {
@@ -73,10 +72,6 @@ class GameState extends Phaser.State {
 
 	playerTile(player) {
 		return this.tileAt(player.tilePosX, player.tilePosY);
-	}
-
-	playersScore() {
-		return this.mapa.scores();
 	}
 
 	divideInto(player, targetTileX, targetTileY) {
