@@ -28,7 +28,9 @@ class GameState extends Phaser.State {
 	}
 
 	createMap() {
-		this.mapa = new GameMap(this.game, 30, 20);
+		this.mapa = new GameMap(this.game, 29, 18);
+		this.mapa.x += 16;
+		this.mapa.y += 54;
 	}
 
 	addPlayerByInfo(playerInfo) {
@@ -36,6 +38,7 @@ class GameState extends Phaser.State {
 		let pos = MapConsts.StartingPositions[id];
 		let player = new Player(this.game, playerInfo, pos.x, pos.y);
 		let startTile = this.playerTile(player);
+		this.mapa.addChild(player);
 		startTile.populate(player, MapConsts.StartHealth);
 		this.playerObjects.push(player);
 	}
