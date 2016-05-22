@@ -15,7 +15,7 @@ class EndState extends Phaser.State {
             this.score.set({ info: { id: 3, colorStr: '#fe544f' } }, 200);
         }
         console.log("EndState:");
-        this.game.add.tileSprite(0, 0, this.game.width, this.game.height, 'background-menu');
+        this.game.add.sprite(0, 0, 'bgEnd');
         let center = { x: this.game.world.centerX, y: this.game.world.centerY };
 
         let maxPts = Math.max.apply(null, Array.from(this.score.values()));
