@@ -7,14 +7,15 @@ class ScoreTable extends Phaser.Sprite {
         this.sprite = new Phaser.Sprite(game, PosX, PosY, key);
         game.add.existing(this);
         
-        let p1Score = new Phaser.Text(game, 262 - 24 - 64 - 32, 12, '0', { font: "24px Arial", fill: "#ffffff" });
+        let p1Score = this.game.add.bitmapText(262 - 24 - 64 - 32, 12, 'font', '0', 24);
         this.addChildAt(p1Score, 0);
-        let p2Score = new Phaser.Text(game, 390 - 24 - 64, 12, '0', { font: "24px Arial", fill: "#ffffff" });
+        let p2Score = this.game.add.bitmapText(390 - 24 - 64, 12, 'font', '0', 24);
         this.addChildAt(p2Score, 1);
-        let p3Score = new Phaser.Text(game, 518 - 24 + 64, 12, '0', { font: "24px Arial", fill: "#ffffff" });
+        let p3Score = this.game.add.bitmapText(518 - 24 + 64, 12, 'font', '0', 24);
         this.addChildAt(p3Score, 2);
-        let p4Score = new Phaser.Text(game, 646 - 24 + 64 + 32, 12, '0', { font: "24px Arial", fill: "#ffffff" });
+        let p4Score = this.game.add.bitmapText(646 - 24 + 64 + 32, 12, 'font', '0', 24);
         this.addChildAt(p4Score, 3);
+        
         
         let p1Pad = new Phaser.Sprite(game, 262 + 24 - 64 - 32, 6, 'pad');
         p1Pad.tint = MapConsts.StartingPositions[0].colorNum;
