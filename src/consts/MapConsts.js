@@ -1,8 +1,8 @@
 const MapConsts = {
     Size : 32,
     StartHealth: 64,
-    SizeX : 30,
-    SizeY : 20,
+    SizeX : 29,
+    SizeY : 18,
     StartingPositions : [
         {
             x : 2,

@@ -22,8 +22,10 @@ class Player extends Phaser.Group {
     constructor(game, info, tilePosX, tilePosY, callbacks) {
         super(game);
         this.callbacks = callbacks || {};
-        this.callbacks.doDivide = function (player, targetTileX, tagretTileY) { };
-        this.callbacks.context = {};
+        if (!this.callbacks.doDivide)
+            this.callbacks.doDivide = function (player, targetTileX, tagretTileY) { };
+        if (!this.callbacks.context)
+            this.callbacks.context = {};
         this.info = info;
         this.tilePosX = tilePosX;
         this.tilePosY = tilePosY;
@@ -47,16 +49,18 @@ class Player extends Phaser.Group {
 
     handlePadDown(btnId) {
         let btnName = this.info.padMap[btnId];
-        console.log("button pressed");
-        console.log(btnName);
+        console.log("button pressed", btnName, "action pressed:" + this.actionPressed);
         if (btnName == 'action')
             this.actionPressed = true;
 
         if (this.moveActions[btnName]) {
             if (!this.actionPressed)
                 this.moveActions[btnName].call(this);
-            else
+            else {
+                
                 this.divideActions[btnName].call(this);
+            }
+                
         }
     }
 
@@ -67,53 +71,79 @@ class Player extends Phaser.Group {
     }
 
     moveUp() {
-        this.tilePosY = (MapConsts.SizeY + this.tilePosY - 1) % MapConsts.SizeY;
-        this.updateSprites();
+        console.log("UP!");
+        let tween = this.game.add
+            .tween(this)
+            .to({
+                y: ((MapConsts.SizeY + this.tilePosY - 1) % MapConsts.SizeY) * MapConsts.Size
+            }, 66, 'Linear', true, 0);
+        tween.onComplete.add(() => {
+            this.tilePosY = (MapConsts.SizeY + this.tilePosY - 1) % MapConsts.SizeY;
+        }, this);
     }
 
     moveDown() {
-        this.tilePosY = (this.tilePosY + 1) % MapConsts.SizeY;
-        this.updateSprites();
+        let tween = this.game.add
+            .tween(this)
+            .to({
+                y: ((MapConsts.SizeY + this.tilePosY + 1) % MapConsts.SizeY) * MapConsts.Size
+            }, 66, 'Linear', true, 0);
+        tween.onComplete.add(() => {
+            this.tilePosY = (MapConsts.SizeY + this.tilePosY + 1) % MapConsts.SizeY;
+        }, this);
     }
 
     moveLeft() {
-        this.tilePosX = (MapConsts.SizeX + this.tilePosX - 1) % MapConsts.SizeX;
-        this.updateSprites();
+        let tween = this.game.add
+            .tween(this)
+            .to({
+                x: ((MapConsts.SizeX + this.tilePosX - 1) % MapConsts.SizeX) * MapConsts.Size
+            }, 66, 'Linear', true, 0);
+        tween.onComplete.add(() => {
+            this.tilePosX = (MapConsts.SizeX + this.tilePosX - 1) % MapConsts.SizeX;
+        }, this);
     }
 
     moveRight() {
-        this.tilePosX = (this.tilePosX + 1) % MapConsts.SizeX;
-        this.updateSprites();
+        let tween = this.game.add
+            .tween(this)
+            .to({
+                x: ((MapConsts.SizeX + this.tilePosX + 1) % MapConsts.SizeX) * MapConsts.Size
+            }, 66, 'Linear', true, 0);
+        tween.onComplete.add(() => {
+            this.tilePosX = (MapConsts.SizeX + this.tilePosX + 1) % MapConsts.SizeX;
+        }, this);
     }
 
     divideTo(tilePosX, tilePosY) {
+        console.log("divide");
         this.callbacks.doDivide.call(this.callbacks.context, this, tilePosX, tilePosY);
     }
 
     divideUp() {
-        let targetX = tilePosX;
-        let targetY = tilePosY - 1;
-        if (tilePosY >= 0)
+        let targetX = this.tilePosX;
+        let targetY = this.tilePosY - 1;
+        if (targetY >= 0)
             this.divideTo(targetX, targetY);
     }
 
     divideDown() {
-        let targetX = tilePosX;
-        let targetY = tilePosY + 1;
-        if (tilePosY < MapConsts.SizeY)
+        let targetX = this.tilePosX;
+        let targetY = this.tilePosY + 1;
+        if (targetY < MapConsts.SizeY)
             this.divideTo(targetX, targetY);
     }
 
     divideLeft() {
-        let targetX = tilePosX - 1;
-        let targetY = tilePosY;
-        if (tilePosX >= 0)
+        let targetX = this.tilePosX - 1;
+        let targetY = this.tilePosY;
+        if (targetX >= 0)
             this.divideTo(targetX, targetY);
     }
 
     divideRight() {
-        let targetX = tilePosX + 1;
-        let targetY = tilePosY;
+        let targetX = this.tilePosX + 1;
+        let targetY = this.tilePosY;
         if (targetX < MapConsts.SizeX)
             this.divideTo(targetX, targetY);
     }

@@ -36,7 +36,7 @@ class GameState extends Phaser.State {
 	addPlayerByInfo(playerInfo) {
 		let id = playerInfo.id;
 		let pos = MapConsts.StartingPositions[id];
-		let player = new Player(this.game, playerInfo, pos.x, pos.y, {doDivide: (player, targetTileX, targetTileY) => {this.divideInto(player, targetTileX, targetTileY)}});
+		let player = new Player(this.game, playerInfo, pos.x, pos.y, { doDivide: (player, targetTileX, targetTileY) => { this.divideInto(player, targetTileX, targetTileY) } });
 		let startTile = this.playerTile(player);
 		this.mapa.addChild(player);
 		startTile.populate(player, MapConsts.StartHealth);
@@ -62,7 +62,7 @@ class GameState extends Phaser.State {
 		this.game.state.states.EndState.setScore(scores);
 		this.game.state.start("EndState");
 	}
-	
+
 	tileAt(targetTileX, targetTileY) {
 		return this.mapa.tileAt(targetTileX, targetTileY);
 	}
@@ -76,20 +76,24 @@ class GameState extends Phaser.State {
 	}
 
 	divideInto(player, targetTileX, targetTileY) {
-		let srcTile = playerTile(player);
-		let targetTile = tileAt(targetTileX, targetTileY);
+		console.log("divide start");
+		let srcTile = this.playerTile(player);
+		let targetTile = this.tileAt(targetTileX, targetTileY);
 		if (!targetTile.isHabitable())
 			return;
 
-		let healthToMove = Math.floor(targetTile.health / 2);
+		let healthToMove = Math.floor(srcTile.health / 2);
+		
 		if (healthToMove == 0) {
 			return;
 		}
-
+		
+		console.log("divide:", healthToMove);
+		
 		if (targetTile.isFree() || player.ownsTile(targetTile)) {
 			srcTile.depopulate(healthToMove);
 			targetTile.populate(player, healthToMove);
-			playDivideSound()
+			this.playDivideSound();
 		}
 		else {
 			let healthToTake = Math.min(targetTile.health, healthToMove);
@@ -99,15 +103,15 @@ class GameState extends Phaser.State {
 			if (healthToPopulate > 0) {
 				targetTile.populate(player, healthToPopulate);
 			}
-			playAttackSound();
+			this.playAttackSound();
 		}
-	}	
-	
-	playDivideSound(){
+	}
+
+	playDivideSound() {
 		this.divideSound.play();
 	}
-	
-	playAttackSound(){
+
+	playAttackSound() {
 		this.attackSound.play();
 	}
 }
