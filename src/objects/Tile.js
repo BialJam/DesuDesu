@@ -35,6 +35,13 @@ class Tile extends Phaser.Group {
         this.updateSprite();
     }
     
+    grow(health) {
+        if (this.player == null)
+            return;
+        this.health += health;
+        this.updateSprite();
+    }
+    
     depopulate(health) {
         this.health = Math.max(0, this.health - health);
         if (this.health === 0) {
