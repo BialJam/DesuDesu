@@ -31,6 +31,7 @@ class LoadingScreen extends Phaser.State {
         
         this.game.load.image('bg', 'assets/bg.png');
         this.game.load.image('bgFrame', 'assets/bgFrame.png');
+        this.game.load.image('pad', 'assets/pad.png');
 }
 
     afterLoaded() {
