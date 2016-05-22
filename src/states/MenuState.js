@@ -60,9 +60,8 @@ class MenuState extends Phaser.State {
             players[i].id = i;
             this.playerButtonId[i] = this.buttons.length;
             this.playerNums++;
-            this.playerz[i] = new PlayerInfo(players[i].padId, players[i].id, players[i].padMap, players[i].padAxisMap);
+            this.playerz[i] = new PlayerInfo(players[i].padId, players[i].id, players[i].padMap);
             this.registerButtonCallback(players[i], i);
-            this.registerAxisCallback(players[i], i);
         }
         console.log("Loaded players.");
         console.log(this.playerSettingsArray());
@@ -139,46 +138,6 @@ class MenuState extends Phaser.State {
         });
     }
 
-    registerAxisCallback(playerInfo, pId) {
-        let pad = this.game.input.gamepad[playerInfo.padId];
-        console.log(pad);
-        pad.addCallbacks(this, {
-            onAxis : (mysteryParameter, axis, state) => {
-                if (state === 0) return;
-                
-                if (this.playerButtonId[pId] < this.buttons.length) {
-                    let a = this.buttons[this.playerButtonId[pId]];
-                    if (a !== 'any') {
-                        playerInfo.padAxisMap[{
-                            axis : axis,
-                            state : state
-                        }] = a;
-                    }
-                    this.playerButtonId[pId]++;
-                    if (this.playerButtonId[pId] >= this.buttons.length) {
-                        this.playerText[pId].text = "ready?";
-                    }
-                    else {
-                        this.playerText[pId].text = this.buttons[this.playerButtonId[pId]];
-                    }
-                }
-                else {
-                    if (pId == 0 && this.isActive[0]) {
-                        this.clearCallbacks();
-                        this.game.players = this.playerInfoArray();
-                        this.game.state.start('GameState');
-                    }
-                    else if (!this.isActive[pId]) {
-                        this.playerText[pId].text = (pId == 0 ? "press 'action' to begin" : "ready!");
-                        this.isActive[pId] = true;
-                        this.playerButtons[pId].frame = 1;
-                        this.saveSettings();
-                    }
-                }
-            }
-        });
-    }
-
     padDownEvent(button, mysteryParameter, id) {
         let padId = 'pad' + (id + 1);
         for (let i = 0; i < this.playerz.length; ++i) {
@@ -189,7 +148,7 @@ class MenuState extends Phaser.State {
         console.log("new player");
 
         let pId = this.playerNums;
-        this.playerz[pId] = new PlayerInfo(padId, pId, {}, {});
+        this.playerz[pId] = new PlayerInfo(padId, pId, {});
         this.playerButtonId[pId] = 0;
         this.playerNums++;
         this.registerButtonCallback(this.playerz[pId], pId);
