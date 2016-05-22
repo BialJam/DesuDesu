@@ -53,14 +53,21 @@ class Player extends Phaser.Group {
         if (btnName == 'action')
             this.actionPressed = true;
 
+        if (btnName == 'dash')
+            this.dashPressed = true;
+
         if (this.moveActions[btnName]) {
+            if (this.dashPressed) {
+                this.divideActions[btnName].call(this);
+                this.moveActions[btnName].call(this);
+                return;
+            }
+
             if (!this.actionPressed)
                 this.moveActions[btnName].call(this);
             else {
-                
                 this.divideActions[btnName].call(this);
             }
-                
         }
     }
 
@@ -68,6 +75,9 @@ class Player extends Phaser.Group {
         let btnName = this.info.padMap[btnId];
         if (btnName == 'action')
             this.actionPressed = false;
+
+        if (btnName == 'dash')
+            this.dashPressed = false;
     }
 
     moveUp() {
@@ -76,7 +86,7 @@ class Player extends Phaser.Group {
             .tween(this)
             .to({
                 y: ((MapConsts.SizeY + this.tilePosY - 1) % MapConsts.SizeY) * MapConsts.Size
-            }, 66, 'Linear', true, 0);
+            }, 50, 'Linear', true, 0);
         tween.onComplete.add(() => {
             this.tilePosY = (MapConsts.SizeY + this.tilePosY - 1) % MapConsts.SizeY;
         }, this);
@@ -87,7 +97,7 @@ class Player extends Phaser.Group {
             .tween(this)
             .to({
                 y: ((MapConsts.SizeY + this.tilePosY + 1) % MapConsts.SizeY) * MapConsts.Size
-            }, 66, 'Linear', true, 0);
+            }, 50, 'Linear', true, 0);
         tween.onComplete.add(() => {
             this.tilePosY = (MapConsts.SizeY + this.tilePosY + 1) % MapConsts.SizeY;
         }, this);
@@ -98,7 +108,7 @@ class Player extends Phaser.Group {
             .tween(this)
             .to({
                 x: ((MapConsts.SizeX + this.tilePosX - 1) % MapConsts.SizeX) * MapConsts.Size
-            }, 66, 'Linear', true, 0);
+            }, 50, 'Linear', true, 0);
         tween.onComplete.add(() => {
             this.tilePosX = (MapConsts.SizeX + this.tilePosX - 1) % MapConsts.SizeX;
         }, this);
@@ -109,7 +119,7 @@ class Player extends Phaser.Group {
             .tween(this)
             .to({
                 x: ((MapConsts.SizeX + this.tilePosX + 1) % MapConsts.SizeX) * MapConsts.Size
-            }, 66, 'Linear', true, 0);
+            }, 50, 'Linear', true, 0);
         tween.onComplete.add(() => {
             this.tilePosX = (MapConsts.SizeX + this.tilePosX + 1) % MapConsts.SizeX;
         }, this);

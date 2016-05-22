@@ -10,7 +10,7 @@ class MenuState extends Phaser.State {
         let center = { x: this.game.world.centerX, y: this.game.world.centerY };
         let resetBtn = this.game.add.button(center.x - 32, center.y + 225, 'colorButtons', () => {this.clearSettings(); this.saveSettings();}, this, 2, 2, 1, 2);
         this.playersColors = ['0x12fe00', '0xfff859', '0x0decfe', '0xfe544f'];
-        this.buttons = ['any', 'up', 'down', 'left', 'right', 'action'];
+        this.buttons = ['any', 'up', 'down', 'left', 'right', 'action', 'dash'];
         this.playerText = {};
         this.isActive = [false, false, false, false];
         this.game.input.gamepad.start();
