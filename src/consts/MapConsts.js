@@ -36,7 +36,7 @@ const MapConsts4 = {
         },
         {
             x: 12,
-            y: 8,
+            y: 7,
         },
         {
             x: 12,
@@ -44,7 +44,7 @@ const MapConsts4 = {
         },
         {
             x: 2,
-            y: 12,
+            y: 7,
         }
     ]
 };
