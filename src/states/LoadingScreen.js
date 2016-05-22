@@ -12,27 +12,28 @@ class LoadingScreen extends Phaser.State {
         //this.load.spritesheet('startBtn-menu', 'assets/button.png', 120, 80);
         // prefix loaded sprites with names of state/object
         this.load.image('loading-2', 'assets/loading/2.png');
-        
-        this.game.load.tilemap('myTileMap', 'assets/level11.json', null, Phaser.Tilemap.TILED_JSON);		
-		this.game.load.image('tiles', 'assets/tileset.png');
+
+        this.game.load.tilemap('myTileMap', 'assets/level11.json', null, Phaser.Tilemap.TILED_JSON);
+        this.game.load.image('tiles', 'assets/tileset.png');
         this.game.load.image('tile', 'assets/tile.png');
-		
-		this.load.spritesheet('cursor', 'assets/cursor.png', 32, 32, 4);	
-        
+
+        this.load.spritesheet('cursor', 'assets/cursor.png', 32, 32, 4);
+
         this.load.bitmapFont('font', 'assets/04B_03___0.png', 'assets/04B_03__.xml');
-        
-        this.game.load.audio('themeAudio', 'assets/audio/themeAudio.mp3'); 
-        this.game.load.audio('attackSound', 'assets/audio/attackSound.wav');    
-        this.game.load.audio('divideSound', 'assets/audio/divideSound.wav');          
-        
-        this.game.load.spritesheet('colorButtons', 'assets/colorButtonSpritesheet.png', 64, 64); 
-        this.game.load.spritesheet('startGameSpritesheet', 'assets/startGameSpritesheet.png', 248, 64); 
-        
+
+        this.game.load.audio('themeAudio', 'assets/audio/themeAudio.mp3');
+        this.game.load.audio('attackSound', 'assets/audio/attackSound.wav');
+        this.game.load.audio('divideSound', 'assets/audio/divideSound.wav');
+        this.game.load.audio('powerUpSound', 'assets/audio/powerUpSound.wav');
+
+        this.game.load.spritesheet('colorButtons', 'assets/colorButtonSpritesheet.png', 64, 64);
+        this.game.load.spritesheet('startGameSpritesheet', 'assets/startGameSpritesheet.png', 248, 64);
+
         this.game.load.image('bg', 'assets/bgEnd.png');
         this.game.load.image('bgFrame', 'assets/bgFrame.png');
         this.load.image('bgEnd', 'assets/bgEnd.png');
         this.game.load.image('pad', 'assets/pad.png');
-}
+    }
 
     afterLoaded() {
         var fns = {
@@ -42,7 +43,7 @@ class LoadingScreen extends Phaser.State {
         if (fns[arguments[1]])
             fns[arguments[1]].call(this);
     }
-    
+
     afterLogoLoaded() {
         this.logo = this.game.add.image(this.game.width / 2, this.game.height / 2, 'loading-logo');
         this.logo.anchor.setTo(0.5);
@@ -51,7 +52,7 @@ class LoadingScreen extends Phaser.State {
     afterBarLoaded() {
         this.origWidth = this.cache.getImage('loading-bar').width;
         this.bar = this.game.add.image(this.game.width / 2 - this.origWidth / 2, this.game.height / 2 + this.logo.height, 'loading-bar');
-       
+
         this.cropRect = new Phaser.Rectangle(0, 0, 0, this.bar.height);
         this.bar.crop(this.cropRect);
         this.barLoaded = true;
@@ -62,7 +63,7 @@ class LoadingScreen extends Phaser.State {
             this.barUpdate(this.load.progress);
         }
     }
-    
+
     barUpdate(pct) {
         this.cropRect.width = pct * this.origWidth / 100;
         this.bar.crop(this.cropRect);
