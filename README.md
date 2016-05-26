@@ -8,10 +8,10 @@ Requires at least 2 gamepads to run. Available here: http://bialjam.github.io/De
 
 ## Authors
 
--Dariusz Antoniuk
--Mateusz Choiński
--Mateusz Dobrzyński
--Wojciech Jaworowski
+- Dariusz Antoniuk
+- Mateusz Choiński
+- Mateusz Dobrzyński
+- Wojciech Jaworowski
 
 ## Install
 
