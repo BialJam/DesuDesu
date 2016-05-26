@@ -1,6 +1,17 @@
-# DesuDesu - Dziel i rządź
+# DesuDesu - Total kwadracik annihilation
 
 Game for bialjam 2016 gamejam in phaser js engine.
+Our game has won the contest: http://bialjam.wi.pb.edu.pl/wyniki-2/
+
+## How to play
+Requires at least 2 gamepads to run. Available here: http://bialjam.github.io/DesuDesu/
+
+## Authors
+
+- Dariusz Antoniuk
+- Mateusz Choiński
+- Mateusz Dobrzyński
+- Wojciech Jaworowski
 
 ## Install
 
