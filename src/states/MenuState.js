@@ -21,7 +21,7 @@ class MenuState extends Phaser.State {
         logo1.anchor.setTo(0.5);
         let logo2 = this.game.add.bitmapText(this.game.world.centerX, 116, 'font', 'Kwadracik', 72);
         logo2.anchor.setTo(0.5);
-        let logo3 = this.game.add.bitmapText(this.game.world.centerX, 184, 'font', 'Anihillation', 72);
+        let logo3 = this.game.add.bitmapText(this.game.world.centerX, 184, 'font', 'Annihilation', 72);
         logo3.anchor.setTo(0.5);
 
         this.clearSettings();
